@@ -13,30 +13,6 @@ const FrontEndSellary = () => {
         </div>
         <div className="card-tools shrink-0 d-none d-sm-block">
           <ul className="nav nav-switch-s2 nav-tabs bg-white">
-            <li className="nav-item">
-              <a
-                href="#navitem"
-                className={auOverview === "day-7" ? "nav-link active" : "nav-link"}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setAuOverview("day-7");
-                }}
-              >
-                7 D
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                href="#navitem"
-                className={auOverview === "month-1" ? "nav-link active" : "nav-link"}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setAuOverview("month-1");
-                }}
-              >
-                1 M
-              </a>
-            </li>
           </ul>
         </div>
       </div>
@@ -44,25 +20,25 @@ const FrontEndSellary = () => {
         <div className="analytic-data-group analytic-ov-group g-3">
           <div className="analytic-data analytic-ov-data">
             <div className="title">Entry Level</div>
-            <div className="change up">
+            <div className="change down">
               <Icon name="arrow-long-down"></Icon> 23%
             </div>
           </div>
           <div className="analytic-data analytic-ov-data">
             <div className="title">Sessions</div>
-            <div className="change up">
+            <div className="change down">
               <Icon name="arrow-long-down"></Icon> 6%
             </div>
           </div>
           <div className="analytic-data analytic-ov-data">
             <div className="title">Users</div>
-            <div className="change down">
+            <div className="change up">
               <Icon name="arrow-long-up"></Icon> 28%
             </div>
           </div>
           <div className="analytic-data analytic-ov-data">
             <div className="title">Users</div>
-            <div className="change down">
+            <div className="change up">
               <Icon name="arrow-long-up"></Icon> 66%
             </div>
           </div>
