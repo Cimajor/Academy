@@ -100,7 +100,7 @@ const NewHomepage = () => {
               Dashboard
               </BlockTitle>
               <BlockDes className="text-soft">
-                <p>Welcome Seldon's Academy  </p>
+                <p>Welcome to Seldon's Academy  </p>
               </BlockDes>
             </BlockHeadContent>
           </BlockBetween>
@@ -173,7 +173,7 @@ const NewHomepage = () => {
                         <div className="project-progress-details">
                           <div className="project-progress-task">
                             <Icon name="check-round-cut"></Icon>
-                            <span>{item.tasks} Tasks</span>
+                            <span>{item.tasks} Skills</span>
                           </div>
                           <div className="project-progress-percent">
                             {days === 0 ? 100 : calcPercentage(item.totalTask, item.tasks)}%
@@ -185,38 +185,20 @@ const NewHomepage = () => {
                         ></Progress>
                       </div>
                       <div className="project-meta">
-                        <ul className="project-users g-1">
-                          {item.team.slice(0, 2).map((item, idx) => {
-                            return (
-                              <li key={idx}>
-                                <UserAvatar
-                                  className="sm"
-                                  text={findUpper(item.label)}
-                                  theme={item.theme}
-                                  image={item.image}
-                                />
-                              </li>
-                            );
-                          })}
-                          {item.team.length > 2 && (
-                            <li>
-                              <UserAvatar theme="light" className="sm" text={`+${item.team.length - 2}`} />
-                            </li>
-                          )}
-                        </ul>
+
                         <span
                           className={`badge badge-dim badge-${
                             days > 10
                               ? "light"
                               : days <= 10 && days >= 2
-                              ? "warning"
+                              ? "light"
                               : days === 1
-                              ? "danger"
+                              ? "light"
                               : days <= 0 && "success"
                           }`}
                         >
                           <Icon name="clock"></Icon>
-                          <span>{days <= 0 ? "Done" : days === 1 ? "Due Tomorrow" : days + " Days Left"}</span>
+                          <span>{days <= 0 ? "Done" : days === 1 ? "Due Tomorrow" : days + " Days of Learning"}</span>
                         </span>
                       </div>
                     </ProjectCard>
@@ -224,14 +206,6 @@ const NewHomepage = () => {
                 );
               })}
           </Row>
-          <div className="mt-3">
-            <PaginationComponent
-              itemPerPage={itemPerPage}
-              totalItems={data.length}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          </div>
         </Block>
         
       </Content>
