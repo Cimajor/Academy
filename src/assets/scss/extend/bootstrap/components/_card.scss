@@ -12,6 +12,7 @@
         background: $accent-dark;
     }
     &-bordered{
+
         border: 1px solid $card-bordered-color;
         &.is-dark{
             border-color: $accent-dark;

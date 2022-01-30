@@ -6,7 +6,9 @@ import { RedirectAs404 } from "../utils/Utils";
 
 import Homepage from "../pages/Homepage";
 import NewHomepage from "../pages/NewHomePage"
-import FrontEnd from "../pages/FrontEndPage"
+import MainFrontend from "../pages/frontend/MainFrontend"
+import HtmlSkill from '../pages/frontend/Skills/HtmlSkill'
+
 import Crypto from "../pages/Crypto";
 import Analytics from "../pages/Analytics";
 import Invest from "../pages/Invest";
@@ -218,7 +220,8 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/nioicon`} component={NioIconPage}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/svg-icons`} component={SVGIconPage}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/1`} component={NewHomepage}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/1/frontend`} component={FrontEnd}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/1/frontend`} component={MainFrontend}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/skill-details/1`} component={HtmlSkill}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={Homepage}></Route>
         <Route component={RedirectAs404}></Route>
       </Switch>
