@@ -4,6 +4,7 @@ import Content from "../layout/content/Content";
 import { projectData} from './pre-built/projects/ProjectData';
 import { ProjectCard} from "../components/partials/project-card/ProjectCard";
 import { findUpper, setDeadline, setDeadlineDays, calcPercentage } from "../utils/Utils";
+import { Link } from "react-router-dom";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown, DropdownItem, Progress } from "reactstrap";
 import {
   Block,
@@ -123,7 +124,9 @@ const NewHomepage = () => {
                         >
                           <UserAvatar className="sq" theme={item.avatarClass} text={findUpper(item.title)} />
                           <div className="project-info">
-                            <h6 className="title">{item.title}</h6>
+                            <Link to={`${item.url}`}>
+                              <h6 className="title" >{item.title}</h6>
+                            </Link>
                             <span className="sub-text">{item.subtitle}</span>
                           </div>
                         </a>

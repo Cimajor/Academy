@@ -7,8 +7,8 @@ import ListOfSources from "./ListOfSources"
 
 const HtmlSkill = () => {
   const [sm, updateSm] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [activeAltTab, setActiveAltTab] = useState("0")
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeAltTab, setActiveAltTab] = useState("1")
 
   const toggleAltTab = (alttab) => {
     if (activeAltTab !== alttab) setActiveAltTab(alttab);
@@ -61,8 +61,8 @@ const HtmlSkill = () => {
           </NavLink>
         </NavItem>
       </Nav>
-      {activeIndex === 0 ? <ListOfSources/> : ""}
-      {activeIndex === 1 ? <div/> : ""}
+      {activeIndex === 1 ? <ListOfSources/> : ""}
+      {activeIndex === 2 ? <div/> : ""}
       
     </React.Fragment>
   );

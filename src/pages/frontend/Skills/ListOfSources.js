@@ -71,7 +71,7 @@ const ListOfSources = () => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>Invoices</BlockTitle>
+              <BlockTitle page>List of sorces</BlockTitle>
               <BlockDes className="text-soft">
                 <p>You have total 937 invoices.</p>
               </BlockDes>
@@ -87,14 +87,13 @@ const ListOfSources = () => {
             </BlockHeadContent>
           </BlockBetween>
         </BlockHead>
-
         <Block>
           <Card className="card-bordered card-stretch">
             <div className="card-inner-group">
               <div className="card-inner">
                 <div className="card-title-group">
                   <div className="card-title">
-                    <h5 className="title">All Invoices</h5>
+                    <h5 className="title">List of Sources</h5>
                   </div>
                   <div className="card-tools mr-n1">
                     <ul className="btn-toolbar">
@@ -205,12 +204,12 @@ const ListOfSources = () => {
                   <thead className="tb-odr-head">
                     <tr className="tb-odr-item">
                       <th className="tb-odr-info">
-                        <span className="tb-odr-id">Order ID</span>
-                        <span className="tb-odr-date d-none d-md-inline-block">Date</span>
+                        <span className="tb-odr-id">Recource</span>
+                        <span className="tb-odr-date d-none d-md-inline-block">Authtor</span>
                       </th>
                       <th className="tb-odr-amount">
-                        <span className="tb-odr-total">Amount</span>
-                        <span className="tb-odr-status d-none d-md-inline-block">Status</span>
+                        <span className="tb-odr-total">Reviews</span>
+                        <span className="tb-odr-status d-none d-md-inline-block">Raiting</span>
                       </th>
                       <th className="tb-odr-action">&nbsp;</th>
                     </tr>
@@ -222,7 +221,7 @@ const ListOfSources = () => {
                             <tr className="tb-odr-item" key={item.id}>
                               <td className="tb-odr-info">
                                 <span className="tb-odr-id">
-                                  <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
+                                  <Link to={{ pathname: `${item.url}`}} target="_blank">
                                     #{item.orderId}
                                   </Link>
                                 </span>
