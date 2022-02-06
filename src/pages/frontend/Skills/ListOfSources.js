@@ -203,15 +203,15 @@ const ListOfSources = () => {
                 <table className="table table-orders">
                   <thead className="tb-odr-head">
                     <tr className="tb-odr-item">
-                      <th className="tb-odr-info">
-                        <span className="tb-odr-id">Recource</span>
-                        <span className="tb-odr-date d-none d-md-inline-block">Authtor</span>
+                    <th className="tb-odr-info">
+                        <span className="tb-odr-id">Source</span>
+                        <span className="tb-odr-date d-none d-md-inline-block">Type</span>
                       </th>
                       <th className="tb-odr-amount">
-                        <span className="tb-odr-total">Reviews</span>
+                        <span className="tb-odr-total">Price</span>
                         <span className="tb-odr-status d-none d-md-inline-block">Raiting</span>
                       </th>
-                      <th className="tb-odr-action">&nbsp;</th>
+                      <th className="tb-odr-action">Included Skills</th>
                     </tr>
                   </thead>
                   <tbody className="tb-odr-body">
@@ -225,7 +225,7 @@ const ListOfSources = () => {
                                     #{item.orderId}
                                   </Link>
                                 </span>
-                                <span className="tb-odr-date">{item.date}</span>
+                                <span className="tb-odr-date">{item.type}</span>
                               </td>
                               <td className="tb-odr-amount">
                                 <span className="tb-odr-total">
@@ -234,11 +234,7 @@ const ListOfSources = () => {
                                 <span className="tb-odr-status">
                                   <Badge
                                     color={
-                                      item.status === "Complete"
-                                        ? "success"
-                                        : item.status === "Pending"
-                                        ? "warning"
-                                        : "danger"
+                                      item.status === "Recomended" ? "success" : "danger"
                                     }
                                     className="badge-dot"
                                   >
@@ -248,16 +244,11 @@ const ListOfSources = () => {
                               </td>
                               <td className="tb-odr-action">
                                 <div className="tb-odr-btns d-none d-sm-inline">
-                                  <Link to={`${process.env.PUBLIC_URL}/invoice-print/${item.id}`} target="_blank">
-                                    <Button color="primary" size="sm" className="btn-icon btn-white btn-dim">
-                                      <Icon name="printer-fill"></Icon>
-                                    </Button>
-                                  </Link>
-                                  <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
-                                    <Button color="primary" size="sm" className="btn btn-dim">
-                                      View
-                                    </Button>
-                                  </Link>
+                                  {item.skills.map(skill => (
+                                    <Button color="primary" size="sm" className="btn btn-dim margin5">
+                                      {skill}
+                                    </Button>))
+                                    }
                                 </div>
                                 <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
                                   <Button className="btn-pd-auto d-sm-none">
