@@ -22,7 +22,7 @@ const UserProfileRegularPage = ({ sm, updateSm, setProfileName }) => {
   const [modalTab, setModalTab] = useState("1");
   const [userInfo, setUserInfo] = useState(userData[0]);
   const [formData, setFormData] = useState({
-    name: "Abu Bin Ishtiak",
+    name: "Illia Milevskiy",
     displayName: "Ishtiak",
     phone: "818474958",
     dob: "1980-08-10",

@@ -16,7 +16,7 @@ export const projectData = [
     tasks: "4",
     totalTask: "10",
     checked: false,
-    url: '/demo1/1/frontend',
+    url: '/frontend',
     deadline: setDeadline(94), // Format ** mm/dd/yyyy
     team: [
       {
@@ -39,7 +39,7 @@ export const projectData = [
     totalTask: "18",
     lead: "Newman John",
     checked: false,
-    url: '/demo1/1/webdesign',
+    url: '/web-design',
     deadline: setDeadline(22), // Format ** mm/dd/yyyy
     team: [
       {
@@ -66,7 +66,7 @@ export const projectData = [
     totalTask: "19",
     lead: "Abu Bin",
     checked: false,
-    url: '/demo1/1/gamedev',
+    url: '/gamedev',
     deadline: setDeadline(5), // Format ** mm/dd/yyyy
     team: [
       {

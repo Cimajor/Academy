@@ -12,7 +12,7 @@ export const chatUserData = [
   },
   {
     id: 2,
-    user: "Abu Bin Ishtiak",
+    user: "Illia Milevskiy",
     active: true,
     theme: "blue",
   },
@@ -129,7 +129,7 @@ export const chatData = [
   },
   {
     id: 2,
-    name: "Abu Bin Ishtiak",
+    name: "Illia Milevskiy",
     nickname: "",
     theme: "blue",
     chatTheme: "purple",
@@ -251,7 +251,7 @@ export const chatData = [
     delivered: "sent",
     user: [
       {
-        name: "Abu Bin Ishtiak",
+        name: "Illia Milevskiy",
         theme: "purple",
       },
       {
@@ -359,7 +359,7 @@ export const chatData = [
     user: [
       {
         id: 1,
-        name: "Abu Bin Ishtiak",
+        name: "Illia Milevskiy",
         theme: "purple",
         role: "Admin",
       },
@@ -391,7 +391,7 @@ export const chatData = [
       },
       {
         id: "chat_3",
-        user: { name: "Abu Bin Ishtiak", theme: "purple" },
+        user: { name: "Illia Milevskiy", theme: "purple" },
         chat: ["This is really cool.", "It’s perfect. Thanks for letting me know."],
         date: "29 Apr, 2020 4:28 PM",
       },
@@ -574,7 +574,7 @@ export const chatData = [
     user: [
       {
         id: 1,
-        name: "Abu Bin Ishtiak",
+        name: "Illia Milevskiy",
         theme: "purple",
         role: "Admin",
       },
@@ -618,7 +618,7 @@ export const chatData = [
       },
       {
         id: "chat_3",
-        user: { name: "Abu Bin Ishtiak", theme: "purple" },
+        user: { name: "Illia Milevskiy", theme: "purple" },
         chat: ["This is really cool.", "It’s perfect. Thanks for letting me know."],
         date: "29 Apr, 2020 4:28 PM",
       },

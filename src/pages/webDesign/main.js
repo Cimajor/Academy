@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FrontEndDashboard from "./FrontEndDashboard";
-import FrontEndSkills from "./FrontEndSkills";
+import FrontEndDashboard from "./dashboard";
+import FrontEndSkills from "../frontend/FrontEndSkills";
 import { Nav, NavItem, NavLink, Row, Col, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 import Head from "../../layout/head/Head";
@@ -47,10 +47,9 @@ const MainFrontEnd = () => {
           <NavLink
             tag="a"
             href="#tab"
-            // to={`${process.env.PUBLIC_URL + link}`}
             className={classnames({ active: activeAltTab === "1" })}
-            onClick={(event) => {
-              event.preventDefault();
+            onClick={(ev) => {
+              ev.preventDefault();
               toggleAltTab("1");
               setActiveIndex(1)
             }}

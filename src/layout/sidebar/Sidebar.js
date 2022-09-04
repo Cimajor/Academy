@@ -40,7 +40,6 @@ const Sidebar = ({ fixed, theme, className, sidebarToggle, mobileView, ...props 
           />
         </div>
         <div className="nk-sidebar-brand">
-          <Logo />
         </div>
       </div>
       <div className="nk-sidebar-content" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

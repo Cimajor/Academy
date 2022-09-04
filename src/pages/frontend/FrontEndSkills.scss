@@ -1,5 +1,6 @@
 .skills-table{
     width:400px;
+    margin-left: 1rem;
 }
 
 .skills-instruments{
@@ -13,4 +14,16 @@
 .skill-name{
     width: 170px !important;
     overflow: hidden;
+}
+
+.done-background{
+    background-color: rgb(80 215 170 / 33%);
+}
+
+.certificated-background{
+    background-color: rgba(166, 196, 82, 0.342);
+}
+
+.to-do-background{
+    background-color: rgba(182, 230, 245, 0.384);
 }

@@ -7,7 +7,7 @@ export const userData = [
   {
     id: 1,
     avatarBg: "purple",
-    name: "Abu Bin Ishtiyak",
+    name: "Illia Milevskiy",
     displayName: "Ishtiak",
     dob: "10 Aug, 1980",
     role: "Customer",

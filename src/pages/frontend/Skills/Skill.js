@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Nav, NavItem, NavLink, Row, Col, TabContent, TabPane } from "reactstrap";
+import { useParams } from "react-router-dom"
 import classnames from "classnames";
 import ListOfSources from "./ListOfSources"
+import Certifications from "./Certififcations"
+import Comunities from "./Comunitites";
 
 
 
@@ -9,6 +12,7 @@ const HtmlSkill = () => {
   const [sm, updateSm] = useState(false);
   const [activeIndex, setActiveIndex] = useState(1);
   const [activeAltTab, setActiveAltTab] = useState("1")
+  const { skill } = useParams()
 
   const toggleAltTab = (alttab) => {
     if (activeAltTab !== alttab) setActiveAltTab(alttab);
@@ -29,7 +33,7 @@ const HtmlSkill = () => {
               setActiveIndex(1)
             }}
           >
-            Where to learn?
+            Resources
           </NavLink>
         </NavItem>
         <NavItem>
@@ -57,12 +61,13 @@ const HtmlSkill = () => {
               setActiveIndex(3)
             }}
           >
-            Comunity
+            Communities
           </NavLink>
         </NavItem>
       </Nav>
       {activeIndex === 1 ? <ListOfSources/> : ""}
-      {activeIndex === 2 ? <div/> : ""}
+      {activeIndex === 2 ? <Certifications/> : ""}
+      {activeIndex === 3 ? <Comunities/> : ""}
       
     </React.Fragment>
   );

@@ -42,10 +42,10 @@ const FrontEndSkills = () => {
         <div className="skills-instruments">
           <SkillsList/>
             <div className="skill-map">
-              <img alt="Skills" style={style} src={ require('../../images/star6.png').default } />
+              {/* <img alt="Skills" style={style} src={ require('../../images/star6.png').default } />
               <img alt="Skills" style={venera} src={ require('../../images/venera.jpg').default } />
               <img alt="Skills" style={mars} src={ require('../../images/mars.jfif').default } />
-              <img alt="Skills" style={moon} src={ require('../../images/moon.jpg').default } />
+              <img alt="Skills" style={moon} src={ require('../../images/moon.jpg').default } /> */}
             </div>
         </div>
     </React.Fragment>

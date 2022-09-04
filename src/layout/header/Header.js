@@ -26,7 +26,6 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
             />
           </div>
           <div className="nk-header-brand d-xl-none">
-            <Logo />
           </div>
           <div className="nk-header-news d-none d-xl-block">
             <News />

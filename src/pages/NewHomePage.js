@@ -101,7 +101,7 @@ const NewHomepage = () => {
               Dashboard
               </BlockTitle>
               <BlockDes className="text-soft">
-                <p>Welcome to Seldon's Academy  </p>
+                <p>Welcome to Schoolless  </p>
               </BlockDes>
             </BlockHeadContent>
           </BlockBetween>

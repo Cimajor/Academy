@@ -9,6 +9,7 @@ import Error404Classic from "./pages/error/404-classic";
 import Error404Modern from "./pages/error/404-modern";
 import Error504Modern from "./pages/error/504-modern";
 import Error504Classic from "./pages/error/504-classic";
+import LandingPage from "./pages/landing/LandingPage";
 
 import Faq from "./pages/others/Faq";
 import Terms from "./pages/others/Terms";
@@ -27,6 +28,7 @@ const App = () => {
       <Route exact path={`${process.env.PUBLIC_URL}/auth-reset`} component={ForgotPassword}></Route>
       <Route exact path={`${process.env.PUBLIC_URL}/auth-register`} component={Register}></Route>
       <Route exact path={`${process.env.PUBLIC_URL}/auth-login`} component={Login}></Route>
+      <Route exact path={`${process.env.PUBLIC_URL}/landing`} component={LandingPage}></Route>
 
       {/* Print Pages */}
       <Route exact path={`${process.env.PUBLIC_URL}/invoice-print/:id`} component={InvoicePrint}></Route>

@@ -72,7 +72,7 @@ export const galleryData = [
     img: StockG,
     userImg: null,
     theme: "purple",
-    userName: "Abu Bin Ishtiak",
+    userName: "Illia Milevskiy",
     userEmail: "abu@softnio.com",
     heart: 149,
   },

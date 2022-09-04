@@ -24,7 +24,7 @@ import {
   PreviewAltCard,
 } from "../../components/Component";
 
-const FrontEndPage = () => {
+const WebDesignDashboard = () => {
   const [sm, updateSm] = useState(false);
   return (
     <React.Fragment>
@@ -132,4 +132,4 @@ const FrontEndPage = () => {
   );
 };
 
-export default FrontEndPage;
+export default WebDesignDashboard;

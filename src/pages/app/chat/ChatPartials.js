@@ -39,7 +39,7 @@ export const MeChat = ({ item, chat, onRemoveMessage }) => {
           })}
         </div>
         <ul className="chat-meta">
-          <li>Abu Bin Ishtiyak</li>
+          <li>Illia Milevskiy</li>
           <li>{item.date}</li>
         </ul>
       </div>

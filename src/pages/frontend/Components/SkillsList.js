@@ -64,7 +64,7 @@ const SkillsTable = () => {
       <div className="card-inner">
         <div className="card-title-group">
           <div className="card-title">
-            <h5 className="title">SKills List</h5>
+            <h5 className="title">Skills List</h5>
           </div>
           <div className="card-tools mr-n1">
             <ul className="btn-toolbar">
@@ -187,11 +187,16 @@ const SkillsTable = () => {
             {currentItems.length > 0
               ? currentItems.map((item) => {
                   return (
-                    <tr className="tb-odr-item" key={item.id}>
+                    <tr className={`tb-odr-item ${
+                      item.status === "Complete"
+                    ? "done-background"
+                    : item.status === "Certificated"
+                    ? "certificated-background"
+                    : "to-do-background"}`} key={item.id}>
                       <td className="tb-odr-info">
                         <span className="tb-odr-id">
-                          <Link to={`${process.env.PUBLIC_URL}/skill-details/${item.id}`}>
-                            #{item.orderId}
+                          <Link to={`${process.env.PUBLIC_URL}/skill-details/${item.orderId}`}>
+                            {item.orderId}
                           </Link>
                         </span>
                       </td>
@@ -201,7 +206,7 @@ const SkillsTable = () => {
                             color={
                               item.status === "Complete"
                                 ? "success"
-                                : item.status === "Pending"
+                                : item.status === "Certificated"
                                 ? "warning"
                                 : "danger"
                             }
@@ -210,6 +215,9 @@ const SkillsTable = () => {
                             {item.status}
                           </Badge>
                         </span>
+                      </td>
+                      <td>
+                         
                       </td>
                     </tr>
                   );

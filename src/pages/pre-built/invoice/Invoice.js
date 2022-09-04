@@ -2,7 +2,7 @@ export const invoiceData = [
   {
     id: 1,
     orderId: "JavaScript",
-    name: "Abu Bin Ishtiyak",
+    name: "Illia Milevskiy",
     email: "info@softnio.com",
     phone: "+811 847-4958",
     date: "23 Jan 2019, 10:45pm",
@@ -25,7 +25,7 @@ export const invoiceData = [
     invoiceItem3: "10.00",
     invoiceItem4: "40.00",
     totalAmount: "210.00",
-    status: "Pending",
+    status: "Certificated",
   },
   {
     id: 3,
@@ -53,7 +53,7 @@ export const invoiceData = [
     invoiceItem3: "1000.00",
     invoiceItem4: "600.00",
     totalAmount: "3660.00",
-    status: "Cancelled",
+    status: "Not Started",
   },
   {
     id: 5,
@@ -95,7 +95,7 @@ export const invoiceData = [
     invoiceItem3: "10.00",
     invoiceItem4: "6.00",
     totalAmount: "126.00",
-    status: "Pending",
+    status: "Certificated",
   },
   {
     id: 8,

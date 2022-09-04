@@ -6,7 +6,7 @@ import User4 from "../../../images/avatar/d-sm.jpg";
 export const kycData = [
   {
     id: "UD01544",
-    name: "Abu Bin Ishtiyak",
+    name: "Illia Milevskiy",
     avatarBg: "primary",
     doc: "Passport",
     check: false,

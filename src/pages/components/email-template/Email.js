@@ -82,15 +82,12 @@ const EmailTemplate = () => {
                   <p className="mt-4">
                     ---- <br /> Regards
                     <br />
-                    Abu Bin Ishtiyak
+                    Illia Milevskiy
                   </p>
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -184,10 +181,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+ 
                 <ul className="email-social">
                   <li>
                     <a
@@ -306,10 +300,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -402,10 +393,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -507,10 +495,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -602,10 +587,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -694,10 +676,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -790,10 +769,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -883,10 +859,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a
@@ -1032,10 +1005,7 @@ const EmailTemplate = () => {
                 </EmailBodyContent>
               </EmailBody>
               <EmailFooter>
-                <p className="email-copyright-text">
-                  Copyright © 2020 DashLite. All rights reserved. <br /> Template Made By{" "}
-                  <a href="https://themeforest.net/user/softnio/portfolio">Softnio</a>.
-                </p>
+
                 <ul className="email-social">
                   <li>
                     <a

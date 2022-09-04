@@ -87,7 +87,7 @@ const MessageProfileSidebar = ({ sidebar, profile }) => {
                 </Col>
                 <Col xs={6}>
                   <span className="sub-text">Requested:</span>
-                  <span>Abu Bin Ishtiak</span>
+                  <span>Illia Milevskiy</span>
                 </Col>
                 <Col xs={6}>
                   <span className="sub-text">Status:</span>

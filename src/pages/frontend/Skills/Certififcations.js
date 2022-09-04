@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
-import {_GetListOfSources} from '../../../utils/Api'
 import Head from "../../../layout/head/Head";
-import { useParams } from "react-router-dom"
 import { UncontrolledDropdown, DropdownMenu, DropdownToggle, Card, Badge, DropdownItem } from "reactstrap";
 import {
   Button,
@@ -16,16 +14,15 @@ import {
   PaginationComponent,
 } from "../../../components/Component";
 import { Link } from "react-router-dom";
-import { sourcesData } from "./Sources";
+import { sourcesData } from "./CertificationsData";
 
-const ListOfSources = () => {
+const Certification = () => {
   const [data, setData] = useState(sourcesData);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(10);
   const [sort, setSortState] = useState("asc");
-  const { skill } = useParams()
 
   // Sorting data
   const sortFunc = () => {
@@ -74,9 +71,9 @@ const ListOfSources = () => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page> Where to learn {skill}?</BlockTitle>
+              <BlockTitle page>List of sorces</BlockTitle>
               <BlockDes className="text-soft">
-                <p>You have total 937 sources.</p>
+                <p>You have total 937 invoices.</p>
               </BlockDes>
             </BlockHeadContent>
             <BlockHeadContent>
@@ -210,10 +207,9 @@ const ListOfSources = () => {
                         <span className="tb-odr-id">Source</span>
                       </th>
                       <th className="tb-odr-amount">
-                        <span className="tb-odr-total">Price</span>
                         <span className="tb-odr-status d-none d-md-inline-block">Raiting</span>
                       </th>
-                      <th className="tb-odr-action">Included Skills</th>
+                      <th className="tb-odr-action">Price</th>
                     </tr>
                   </thead>
                   <tbody className="tb-odr-body">
@@ -230,9 +226,6 @@ const ListOfSources = () => {
                                 <span className="tb-odr-date">{item.type}</span>
                               </td>
                               <td className="tb-odr-amount">
-                                <span className="tb-odr-total">
-                                  <span className="amount">${item.totalAmount}</span>
-                                </span>
                                 <span className="tb-odr-status">
                                   <Badge
                                     color={
@@ -246,11 +239,7 @@ const ListOfSources = () => {
                               </td>
                               <td className="tb-odr-action">
                                 <div className="tb-odr-btns d-none d-sm-inline">
-                                  {item.skills.map(skill => (
-                                    <Button color="primary" size="sm" className="btn btn-dim margin5">
-                                      {skill}
-                                    </Button>))
-                                    }
+                                <span className="amount">${item.totalAmount}</span>
                                 </div>
                                 <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
                                   <Button className="btn-pd-auto d-sm-none">
@@ -287,4 +276,4 @@ const ListOfSources = () => {
     </React.Fragment>
   );
 };
-export default ListOfSources;
+export default Certification;

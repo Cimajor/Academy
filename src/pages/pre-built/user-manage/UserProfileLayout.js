@@ -12,7 +12,7 @@ import { Card, DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle 
 const UserProfileLayout = () => {
   const [sm, updateSm] = useState(false);
   const [mobileView , setMobileView] = useState(false);
-  const [profileName, setProfileName] = useState("Abu Bin Ishtiak");
+  const [profileName, setProfileName] = useState("Illia Milevskiy");
   
   
   // function to change the design view under 990 px

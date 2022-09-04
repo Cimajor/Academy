@@ -6,7 +6,7 @@ export const transactionData = [
     img: null,
     initial: "AB",
     theme: "purple",
-    name: "Abu Bin Ishtiak",
+    name: "Illia Milevskiy",
     date: "02/11/2020",
     ref: "SUB-2309232",
     amount: "4596.75",

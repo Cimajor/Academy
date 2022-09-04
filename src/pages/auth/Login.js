@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../images/logo.png";
-import LogoDark from "../../images/logo-dark.png";
+import LogoSchoolless from "../../images/Schoolless_logo_1.png";
 import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
 import AuthFooter from "./AuthFooter";
@@ -25,8 +25,8 @@ const Login = () => {
 
   const onFormSubmit = (formData) => {
     setLoading(true);
-    const loginName = "info@softnio.com";
-    const pass = "123456";
+    const loginName = "illia.milevskiy@gmail.com";
+    const pass = "password";
     if (formData.name === loginName && formData.passcode === pass) {
       localStorage.setItem("accessToken", "token");
       setTimeout(() => {
@@ -54,8 +54,8 @@ const Login = () => {
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
             <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
-              <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
-              <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
+              <img className="logo-light logo-img logo-img-lg" src={LogoSchoolless} alt="logo" />
+              <img className="logo-dark logo-img logo-img-lg" src={LogoSchoolless} alt="logo-dark" />
             </Link>
           </div>
 
@@ -89,7 +89,7 @@ const Login = () => {
                     id="default-01"
                     name="name"
                     ref={register({ required: "This field is required" })}
-                    defaultValue="info@softnio.com"
+                    defaultValue="illia.milevskiy@gmail.com"
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
@@ -122,7 +122,7 @@ const Login = () => {
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
-                    defaultValue="123456"
+                    defaultValue="password"
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
