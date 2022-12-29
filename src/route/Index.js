@@ -7,6 +7,8 @@ import { RedirectAs404 } from "../utils/Utils";
 import Homepage from "../pages/Homepage";
 import NewHomepage from "../pages/NewHomePage"
 import MainFrontend from "../pages/frontend/MainFrontend"
+import FrontEndSkills from "../pages/frontend/FrontEndSkills"
+import FrontEndDashboard from "../pages/frontend/FrontEndDashboard"
 import WebDesignMain from "../pages/webDesign/main"
 import SkillDetails from '../pages/frontend/Skills/Skill'
 
@@ -224,6 +226,8 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/svg-icons`} component={SVGIconPage}></Route>
         {/* <Route exact path={`${process.env.PUBLIC_URL}/1`} component={NewHomepage}></Route> */}
         <Route exact path={`${process.env.PUBLIC_URL}/frontend`} component={MainFrontend}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/frontend/dashboard`} component={FrontEndDashboard}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/frontend/skills`} component={FrontEndSkills}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/web-design`} component={WebDesignMain}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/skill-details/:skill`} component={SkillDetails}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/`} component={NewHomepage}></Route>

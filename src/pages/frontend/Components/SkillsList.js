@@ -15,6 +15,7 @@ import {
 } from "../../../components/Component";
 import { Link } from "react-router-dom";
 import { invoiceData } from "../../../pages/pre-built/invoice/Invoice";
+import SkillsMap from "./SkillsMap"
 
 
 const SkillsTable = () => {
@@ -66,6 +67,7 @@ const SkillsTable = () => {
           <div className="card-title">
             <h5 className="title">Skills List</h5>
           </div>
+
           <div className="card-tools mr-n1">
             <ul className="btn-toolbar">
               <li>
@@ -226,6 +228,7 @@ const SkillsTable = () => {
           </tbody>
         </table>
       </div>
+
       <div className="card-inner">
         {currentItems.length > 0 ? (
           <PaginationComponent
@@ -240,6 +243,7 @@ const SkillsTable = () => {
             <span className="text-silent">No data found</span>
           </div>
         )}
+
       </div>
     </div>
     </Card>)

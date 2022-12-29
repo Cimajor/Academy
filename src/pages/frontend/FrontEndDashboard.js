@@ -34,7 +34,7 @@ const FrontEndPage = () => {
           <div className="nk-block-between">
             <BlockHeadContent>
               <BlockTitle page tag="h3">
-                Dashboard
+                FrontEnd Dashboard
               </BlockTitle>
               <BlockDes className="text-soft">
                 <p>FrontEnd</p>

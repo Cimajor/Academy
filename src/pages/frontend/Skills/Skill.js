@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, NavItem, NavLink, Row, Col, TabContent, TabPane } from "reactstrap";
 import { useParams } from "react-router-dom"
+import {_GetListOfSources} from "../../../utils/Api"
 import classnames from "classnames";
 import ListOfSources from "./ListOfSources"
 import Certifications from "./Certififcations"
 import Comunities from "./Comunitites";
+import SkillsMap from "../Components/SkillsMap"
 
 
 

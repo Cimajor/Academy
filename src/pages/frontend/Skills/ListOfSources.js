@@ -3,6 +3,7 @@ import Content from "../../../layout/content/Content";
 import {_GetListOfSources} from '../../../utils/Api'
 import Head from "../../../layout/head/Head";
 import { useParams } from "react-router-dom"
+import { Spinner } from "reactstrap";
 import { UncontrolledDropdown, DropdownMenu, DropdownToggle, Card, Badge, DropdownItem } from "reactstrap";
 import {
   Button,
@@ -17,6 +18,8 @@ import {
 } from "../../../components/Component";
 import { Link } from "react-router-dom";
 import { sourcesData } from "./Sources";
+import SkillsMap from "../Components/SkillsMap"
+
 
 const ListOfSources = () => {
   const [data, setData] = useState(sourcesData);
@@ -25,6 +28,8 @@ const ListOfSources = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(10);
   const [sort, setSortState] = useState("asc");
+  const [isLoading, setIsLoading] = useState(false)
+  const [listOfSource, setListOfSource] = useState([])
   const { skill } = useParams()
 
   // Sorting data
@@ -50,6 +55,19 @@ const ListOfSources = () => {
       setData([...sourcesData]);
     }
   }, [onSearchText]);
+
+  useEffect(() => {
+    getListOfSkillSources(skill)
+  }, []);
+
+  const getListOfSkillSources = (skill) => {
+    setIsLoading(true)
+    
+    _GetListOfSources(skill)
+    .then(response => {setListOfSource(response.data.results); console.log(response.data.results)})
+    .catch(error => console.log(error))
+    .then(() => setIsLoading(false))
+  }
 
   // onChange function for searching name
   const onFilterChange = (e) => {
@@ -213,25 +231,26 @@ const ListOfSources = () => {
                         <span className="tb-odr-total">Price</span>
                         <span className="tb-odr-status d-none d-md-inline-block">Raiting</span>
                       </th>
-                      <th className="tb-odr-action">Included Skills</th>
+                      <th className="tb-odr-action">Instructor</th>
                     </tr>
                   </thead>
+                  {isLoading ? <Spinner size="bg" color="light" /> : 
                   <tbody className="tb-odr-body">
-                    {currentItems.length > 0
-                      ? currentItems.map((item) => {
+                    {listOfSource.length > 0
+                      ? listOfSource.map((item) => {
                           return (
-                            <tr className="tb-odr-item" key={item.id}>
+                            <tr className="tb-odr-item" key={item.title}>
                               <td className="tb-odr-info">
                                 <span className="tb-odr-id">
-                                  <Link to={{ pathname: `${item.url}`}} target="_blank">
-                                    #{item.orderId}
+                                  <Link to={{ pathname: `https://www.udemy.com${item.url}`}} target="_blank">
+                                    {item.title}
                                   </Link>
                                 </span>
-                                <span className="tb-odr-date">{item.type}</span>
+                                <span className="tb-odr-date">{item._class}</span>
                               </td>
                               <td className="tb-odr-amount">
                                 <span className="tb-odr-total">
-                                  <span className="amount">${item.totalAmount}</span>
+                                  <span className="amount">{item.price_detail.amount} {item.price_detail.currency_symbol}</span>
                                 </span>
                                 <span className="tb-odr-status">
                                   <Badge
@@ -246,11 +265,9 @@ const ListOfSources = () => {
                               </td>
                               <td className="tb-odr-action">
                                 <div className="tb-odr-btns d-none d-sm-inline">
-                                  {item.skills.map(skill => (
-                                    <Button color="primary" size="sm" className="btn btn-dim margin5">
-                                      {skill}
-                                    </Button>))
-                                    }
+                                <span>
+                                      {item.visible_instructors[0].display_name}
+                                      </span>
                                 </div>
                                 <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
                                   <Button className="btn-pd-auto d-sm-none">
@@ -263,6 +280,7 @@ const ListOfSources = () => {
                         })
                       : null}
                   </tbody>
+                  }
                 </table>
               </div>
               <div className="card-inner">

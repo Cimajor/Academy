@@ -33,6 +33,7 @@ const MainFrontEnd = () => {
           <NavLink
             tag="a"
             href="#tab"
+            // to={`${process.env.PUBLIC_URL + "/frontend/dashboard"}`}
             className={classnames({ active: activeAltTab === "0" })}
             onClick={(ev) => {
               ev.preventDefault();
@@ -47,7 +48,7 @@ const MainFrontEnd = () => {
           <NavLink
             tag="a"
             href="#tab"
-            // to={`${process.env.PUBLIC_URL + link}`}
+            //  to={`${process.env.PUBLIC_URL + "/frontend/skills"}`}
             className={classnames({ active: activeAltTab === "1" })}
             onClick={(event) => {
               event.preventDefault();

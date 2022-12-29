@@ -3,13 +3,7 @@ import Content from "../../layout/content/Content";
 import Head from "../../layout/head/Head";
 import FrontEndSellary from "../../components/partials/analytics/audience-overview/FrontEndSellary";
 import ActiveUser from "../../components/partials/analytics/active-user/ActiveUser";
-import WebsitePerformance from "../../components/partials/analytics/website-perfomance/WebsitePerfomance";
-import TrafficChannel from "../../components/partials/analytics/traffic-channel/Traffic";
-import TrafficDougnut from "../../components/partials/analytics/traffic-dougnut/TrafficDoughnut";
 import UserMap from "../../components/partials/analytics/user-map/UserMap";
-import BrowserUser from "../../components/partials/analytics/browser-users/BrowserUser";
-import PageViewer from "../../components/partials/analytics/page-view/PageView";
-import SessionDevice from "../../components/partials/analytics/session-devices/SessionDevice";
 import { DropdownToggle, DropdownMenu, Card, UncontrolledDropdown, DropdownItem } from "reactstrap";
 import {
   Block,
