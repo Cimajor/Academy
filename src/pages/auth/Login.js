@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../images/logo.png";
+
 import LogoSchoolless from "../../images/Schoolless_logo_1.png";
 import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
@@ -16,33 +17,67 @@ import {
 } from "../../components/Component";
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import FirebaaseAuthService from "../../utils/FireBaseAuth";
+import { useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [errorVal, setError] = useState("");
+  const { login } = useAuth();
+
+  // const onFormSubmit = (formData) => {
+  //   console.log(formData);
+
+  //   signInWithEmailAndPassword(auth, formData.name, formData.passcode)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       localStorage.setItem("accessToken", userCredential._tokenResponse.idToken);
+  //       window.history.pushState(
+  //         `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+  //         "auth-login",
+  //         `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+  //       );
+  //       window.location.reload();
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       setError(`Cannot login with credentials`, errorCode + " " + errorMessage);
+  //       // ..
+  //     });
 
   const onFormSubmit = (formData) => {
-    setLoading(true);
-    const loginName = "illia.milevskiy@gmail.com";
-    const pass = "password";
-    if (formData.name === loginName && formData.passcode === pass) {
-      localStorage.setItem("accessToken", "token");
-      setTimeout(() => {
-        window.history.pushState(
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-          "auth-login",
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-        );
-        window.location.reload();
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        setError("Cannot login with credentials");
-        setLoading(false);
-      }, 2000);
+    try {
+      login(formData.name, formData.passcode);
+    } catch (error) {
+      console.log(error);
     }
+    // await  FirebaaseAuthService.loginUser(formData.name, formData.passcode);
+
+    // setLoading(true);
+    // const loginName = "illia.milevskiy@gmail.com";
+    // const pass = "password";
+    // if (formData.name === loginName && formData.passcode === pass) {
+    //   localStorage.setItem("accessToken", "token");
+    //   setTimeout(() => {
+    //     window.history.pushState(
+    //       `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+    //       "auth-login",
+    //       `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+    //     );
+    //     window.location.reload();
+    //   }, 2000);
+    // } else {
+    //   setTimeout(() => {
+    //     setError("Cannot login with credentials");
+    //     setLoading(false);
+    //   }, 2000);
+    // }
   };
 
   const { errors, register, handleSubmit } = useForm();

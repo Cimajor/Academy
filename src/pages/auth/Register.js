@@ -17,15 +17,31 @@ import {
 import { Spinner, FormGroup } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../../utils/Database";
 
 const Register = ({ history }) => {
   const [passState, setPassState] = useState(false);
   const [loading, setLoading] = useState(false);
   const { errors, register, handleSubmit } = useForm();
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (formData) => {
     setLoading(true);
-    setTimeout(() => history.push(`${process.env.PUBLIC_URL}/auth-success`), 2000);
+
+
+  // createUserWithEmailAndPassword(auth, formData.email, formData.passcode)
+  // .then((userCredential) => {
+  //   // Signed in 
+  //   const user = userCredential.user;
+  //   setTimeout(() => history.push(`${process.env.PUBLIC_URL}/auth-login`), 2000);
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // ..
+  // });
+
   };
   return (
     <React.Fragment>
@@ -48,22 +64,6 @@ const Register = ({ history }) => {
               </BlockContent>
             </BlockHead>
             <form className="is-alter" onSubmit={handleSubmit(handleFormSubmit)}>
-              <FormGroup>
-                <label className="form-label" htmlFor="name">
-                  Name
-                </label>
-                <div className="form-control-wrap">
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    ref={register({ required: true })}
-                    className="form-control-lg form-control"
-                  />
-                  {errors.name && <p className="invalid">This field is required</p>}
-                </div>
-              </FormGroup>
               <FormGroup>
                 <div className="form-label-group">
                   <label className="form-label" htmlFor="default-01">

@@ -4,7 +4,7 @@ import UserProfileRegularPage from "./UserProfileRegular";
 import UserProfileSettingPage from "./UserProfileSetting";
 import UserProfileNotificationPage from "./UserProfileNotification";
 import UserProfileActivityPage from "./UserProfileActivity";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import { Icon, UserAvatar } from "../../../components/Component";
 import { findUpper } from "../../../utils/Utils";
 import { Card, DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle } from "reactstrap";
@@ -161,7 +161,7 @@ const UserProfileLayout = () => {
             </div>
             <div className="card-inner card-inner-lg">
               {sm && mobileView && <div className="toggle-overlay" onClick={() => updateSm(!sm)}></div>}
-              <Switch>
+              <Routes>
                 <Route
                   exact
                   path={`${process.env.PUBLIC_URL}/user-profile-regular`}
@@ -182,7 +182,7 @@ const UserProfileLayout = () => {
                   path={`${process.env.PUBLIC_URL}/user-profile-setting`}
                   render={() => <UserProfileSettingPage updateSm={updateSm} sm={sm} />}
                 ></Route>
-              </Switch>
+              </Routes>
             </div>
           </div>
         </Card>

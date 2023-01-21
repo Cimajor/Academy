@@ -1,16 +1,17 @@
-import React, { Suspense, useLayoutEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Suspense, useLayoutEffect, useState, useEffect } from "react";
+import { Switch, Routes, Redirect } from "react-router-dom";
 import { ProductContextProvider } from "../pages/pre-built/products/ProductContext";
-import { UserContextProvider } from "../pages/pre-built/user-manage/UserContext";
+// import { UserContextProvider } from "../pages/pre-built/user-manage/UserContext";
 import { RedirectAs404 } from "../utils/Utils";
+import FirebaaseAuthService from "../utils/FireBaseAuth";
 
 import Homepage from "../pages/Homepage";
-import NewHomepage from "../pages/NewHomePage"
-import MainFrontend from "../pages/frontend/MainFrontend"
-import FrontEndSkills from "../pages/frontend/FrontEndSkills"
-import FrontEndDashboard from "../pages/frontend/FrontEndDashboard"
-import WebDesignMain from "../pages/webDesign/main"
-import SkillDetails from '../pages/frontend/Skills/Skill'
+import NewHomepage from "../pages/NewHomePage";
+import MainFrontend from "../pages/frontend/MainFrontend";
+import FrontEndSkills from "../pages/frontend/FrontEndSkills";
+import FrontEndDashboard from "../pages/frontend/FrontEndDashboard";
+import WebDesignMain from "../pages/webDesign/main";
+import SkillDetails from "../pages/frontend/Skills/Skill";
 
 import Crypto from "../pages/Crypto";
 import Analytics from "../pages/Analytics";
@@ -61,7 +62,7 @@ import SVGIconPage from "../pages/components/crafted-icons/SvgIcons";
 
 import ProjectCardPage from "../pages/pre-built/projects/ProjectCard";
 import ProjectListPage from "../pages/pre-built/projects/ProjectList";
-import UserListRegularPage from "../pages/pre-built/user-manage/UserListRegular";
+import ProfessionsDashboard from "../pages/pre-built/user-manage/ProfessionsDashboard";
 import UserContactCardPage from "../pages/pre-built/user-manage/UserContactCard";
 import UserDetailsPage from "../pages/pre-built/user-manage/UserDetailsRegular";
 import UserListCompact from "../pages/pre-built/user-manage/UserListCompact";
@@ -84,15 +85,33 @@ import Calender from "../pages/app/calender/Calender";
 import DateTimePicker from "../pages/components/forms/DateTimePicker";
 
 import LandingPage from "../pages/landing/LandingPage";
+// import { AuthContextProvider, useAuthState } from "../utils/firebase";
 
 const Pages = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
 
+  // const AuthenticatedRoute = ({ component: C, ...props }) => {
+  //   const { isAuthenticated } = useAuthState();
+  //   console.log("__________", isAuthenticated);
+  //   return (
+  //     <Route
+  //       {...props}
+  //       render={(routeProps) => (isAuthenticated ? <C {...routeProps} /> : <Redirect to="/auth-login" />)}
+  //     />
+  //   );
+  // };
+  // const UnauthenticatedRoute = ({ component: C, ...props }) => {
+  //   const { isAuthenticated } = useAuthState();
+  //   return (
+  //     <Route {...props} render={(routeProps) => (!isAuthenticated ? <C {...routeProps} /> : <Redirect to="/" />)} />
+  //   );
+  // };
+
   return (
-    <Suspense fallback={<div />}>
-      <Switch>
+    // <Suspense fallback={<div />}>
+      <Routes>
         {/*Dashboards*/}
         <Route exact path={`${process.env.PUBLIC_URL}/crypto`} component={Crypto}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/analytics`} component={Analytics}></Route>
@@ -106,27 +125,21 @@ const Pages = () => {
           exact
           path={`${process.env.PUBLIC_URL}/user-list-regular`}
           render={() => (
-            <UserContextProvider>
-              <UserListRegularPage />
-            </UserContextProvider>
+              <ProfessionsDashboard />
           )}
         ></Route>
         <Route //Context Api added
           exact
           path={`${process.env.PUBLIC_URL}/user-list-compact`}
           render={() => (
-            <UserContextProvider>
               <UserListCompact />
-            </UserContextProvider>
           )}
         ></Route>
         <Route //Context Api added
           exact
           path={`${process.env.PUBLIC_URL}/user-details-regular/:id`}
           render={(props) => (
-            <UserContextProvider>
               <UserDetailsPage {...props} />
-            </UserContextProvider>
           )}
         ></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/user-profile-regular/`} component={UserProfileLayout}></Route>
@@ -141,9 +154,8 @@ const Pages = () => {
           exact
           path={`${process.env.PUBLIC_URL}/user-contact-card`}
           render={() => (
-            <UserContextProvider>
               <UserContactCardPage />
-            </UserContextProvider>
+
           )}
         ></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/kyc-list-regular`} component={KycListRegular}></Route>
@@ -230,11 +242,11 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/frontend/skills`} component={FrontEndSkills}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/web-design`} component={WebDesignMain}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/skill-details/:skill`} component={SkillDetails}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/`} component={NewHomepage}></Route>
+        {/* <AuthenticatedRoute exact path={`${process.env.PUBLIC_URL}/`} component={NewHomepage}></AuthenticatedRoute> */}
         <Route exact path={`${process.env.PUBLIC_URL}/2`} component={LandingPage}></Route>
         <Route component={RedirectAs404}></Route>
-      </Switch>
-    </Suspense>
+      </Routes>
+    // </Suspense>
   );
 };
 export default Pages;

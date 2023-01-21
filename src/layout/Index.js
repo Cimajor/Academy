@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Pages from "../route/Index";
 import Sidebar from "./sidebar/Sidebar";
 import Head from "./head/Head";
@@ -34,9 +35,8 @@ const Layout = () => {
   useEffect(() => {
     document.body.className = `nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme ${
       themeState.skin === "dark" ? "dark-mode" : ""
-    }`
-  },[themeState.skin])
-  
+    }`;
+  }, [themeState.skin]);
 
   // function to change the design view under 1200 px
   const viewChange = () => {
@@ -60,11 +60,18 @@ const Layout = () => {
       <Head title="Loading" />
       <div className="nk-app-root">
         <div className="nk-main">
-          <Sidebar sidebarToggle={toggleSidebar} fixed  mobileView={mobileView} theme={themeState.sidebar} className={sidebarClass} />
+          <Sidebar
+            sidebarToggle={toggleSidebar}
+            fixed
+            mobileView={mobileView}
+            theme={themeState.sidebar}
+            className={sidebarClass}
+          />
           {visibility && mobileView && <div className="nk-sidebar-overlay" onClick={toggleSidebar}></div>}
           <div className="nk-wrap">
             <Header sidebarToggle={toggleSidebar} setVisibility={setVisibility} fixed theme={themeState.header} />
-            <Pages />
+            {/* <Pages /> */}
+            <Outlet />
             <Footer />
           </div>
         </div>

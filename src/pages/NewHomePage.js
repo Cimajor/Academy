@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Head from "../layout/head/Head";
 import Content from "../layout/content/Content";
-import { projectData} from './pre-built/projects/ProjectData';
-import { ProjectCard} from "../components/partials/project-card/ProjectCard";
+import { projectData } from "./pre-built/projects/ProjectData";
+import { ProjectCard } from "../components/partials/project-card/ProjectCard";
 import { findUpper, setDeadline, setDeadlineDays, calcPercentage } from "../utils/Utils";
 import { Link } from "react-router-dom";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown, DropdownItem, Progress } from "reactstrap";
@@ -22,29 +22,27 @@ import {
 } from "../components/Component";
 import { useForm } from "react-hook-form";
 
-
-
 const NewHomepage = () => {
-    const [data, setData] = useState(projectData);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemPerPage] = useState(8);
-    const [editId, setEditedId] = useState();
-    const [formData, setFormData] = useState({
-      title: "",
-      subtitle: "",
-      description: "",
-      lead: "",
-      tasks: 0,
-      team: {},
-      totalTask: 0,
-      date: new Date(),
-    });
-    const [modal, setModal] = useState({
-      add: false,
-      edit: false,
-    });
-     
-      // function that loads the want to editted data
+  const [data, setData] = useState(projectData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerPage] = useState(8);
+  const [editId, setEditedId] = useState();
+  const [formData, setFormData] = useState({
+    title: "",
+    subtitle: "",
+    description: "",
+    lead: "",
+    tasks: 0,
+    team: {},
+    totalTask: 0,
+    date: new Date(),
+  });
+  const [modal, setModal] = useState({
+    add: false,
+    edit: false,
+  });
+
+  // function that loads the want to editted data
   const onEditClick = (id) => {
     data.forEach((item) => {
       if (item.id === id) {
@@ -72,22 +70,17 @@ const NewHomepage = () => {
     setData([...newData]);
   };
 
-
-
-// Get current list, pagination
+  // Get current list, pagination
   // Get current list, pagination
 
-  
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const { errors, register, handleSubmit } = useForm();
-
 
   const [sm, updateSm] = useState(false);
   return (
@@ -98,10 +91,10 @@ const NewHomepage = () => {
           <BlockBetween>
             <BlockHeadContent>
               <BlockTitle page tag="h3">
-              Dashboard
+                Dashboard
               </BlockTitle>
               <BlockDes className="text-soft">
-                <p>Welcome to Schoolless  </p>
+                <p>Welcome to Schoolless </p>
               </BlockDes>
             </BlockHeadContent>
           </BlockBetween>
@@ -125,7 +118,7 @@ const NewHomepage = () => {
                           <UserAvatar className="sq" theme={item.avatarClass} text={findUpper(item.title)} />
                           <div className="project-info">
                             <Link to={`${item.url}`}>
-                              <h6 className="title" >{item.title}</h6>
+                              <h6 className="title">{item.title}</h6>
                             </Link>
                             <span className="sub-text">{item.subtitle}</span>
                           </div>
@@ -188,7 +181,6 @@ const NewHomepage = () => {
                         ></Progress>
                       </div>
                       <div className="project-meta">
-
                         <span
                           className={`badge badge-dim badge-${
                             days > 10
@@ -210,7 +202,6 @@ const NewHomepage = () => {
               })}
           </Row>
         </Block>
-        
       </Content>
     </React.Fragment>
   );

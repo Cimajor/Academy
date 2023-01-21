@@ -9,13 +9,14 @@ import reportWebVitals from "./reportWebVitals";
 const Error404Modern = lazy(() => import("./pages/error/404-modern"));
 
 ReactDOM.render(
-  <React.Fragment>
-    <Suspense fallback={<div />}>
-      <Router basename={`/`}>
-        <Route render={({ location }) => (location.state && location.state.is404 ? <Error404Modern /> : <App />)} />
-      </Router>
-    </Suspense>
-  </React.Fragment>,
+  // <React.Fragment>
+  //   <Suspense fallback={<div />}>
+  //     <Router basename={`/`}>
+  //       <Route render={({ location }) => (location.state && location.state.is404 ? <Error404Modern /> : <App />)} />
+  //     </Router>
+  //   </Suspense>
+  // </React.Fragment>,
+  <App/>,
   document.getElementById("root")
 );
 

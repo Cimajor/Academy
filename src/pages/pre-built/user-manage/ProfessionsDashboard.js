@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
+// import { _CreateProfession } from "../../../utils/Api";
 import {
   DropdownMenu,
   DropdownToggle,
@@ -36,11 +37,11 @@ import { filterRole, filterStatus, userData } from "./UserData";
 import { bulkActionOptions, findUpper } from "../../../utils/Utils";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { UserContext } from "./UserContext";
+// import { UserContext } from "./UserContext";
 
-const UserListRegularPage = () => {
-  const { contextData } = useContext(UserContext);
-  const [data, setData] = contextData;
+const ProfessionsDashboard = () => {
+  // const { contextData } = useContext(UserContext);
+  // const [data, setData] = contextData;
 
   const [sm, updateSm] = useState(false);
   const [tablesm, updateTableSm] = useState(false);
@@ -53,10 +54,10 @@ const UserListRegularPage = () => {
   const [editId, setEditedId] = useState();
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    balance: "",
-    phone: "",
-    status: "Active",
+    complexity: "",
+    startSalary: "",
+    avarageSalary: "",
+    hours: "",
   });
   const [actionText, setActionText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -136,73 +137,73 @@ const UserListRegularPage = () => {
   };
 
   // submit function to add a new item
-  const onFormSubmit = (submitData) => {
-    const { name, email, balance, phone } = submitData;
+  const onAddProfession = (submitData) => {
+    const { name, complexity, startSalary, avarageSalary, hours } = submitData;
     let submittedData = {
-      id: data.length + 1,
-      avatarBg: "purple",
       name: name,
-      role: "Customer",
-      email: email,
-      balance: balance,
-      phone: phone,
-      emailStatus: "success",
-      kycStatus: "alert",
-      lastLogin: "10 Feb 2020",
-      status: formData.status,
-      country: "Bangladesh",
+      complexity: complexity,
+      startSalary: startSalary,
+      avarageSalary: avarageSalary,
+      hours: hours,
     };
+    try {
+      _CreateProfession(submittedData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(submittedData);
     setData([submittedData, ...data]);
     resetForm();
     setModal({ edit: false }, { add: false });
   };
 
   // submit function to update a new item
-  const onEditSubmit = (submitData) => {
-    const { name, email, phone } = submitData;
-    let submittedData;
-    let newitems = data;
-    newitems.forEach((item) => {
-      if (item.id === editId) {
-        submittedData = {
-          id: item.id,
-          avatarBg: item.avatarBg,
-          name: name,
-          image: item.image,
-          role: item.role,
-          email: email,
-          balance: formData.balance,
-          phone: "+" + phone,
-          emailStatus: item.emailStatus,
-          kycStatus: item.kycStatus,
-          lastLogin: item.lastLogin,
-          status: formData.status,
-          country: item.country,
-        };
-      }
-    });
-    let index = newitems.findIndex((item) => item.id === editId);
-    newitems[index] = submittedData;
-    setModal({ edit: false });
-    resetForm();
-  };
+  // const onEditSubmit = (submitData) => {
+  //   const { name, email, phone } = submitData;
+  //   let submittedData;
+  //   let newitems = data;
+  //   newitems.forEach((item) => {
+  //     if (item.id === editId) {
+  //       submittedData = {
+  //         id: item.id,
+  //         avatarBg: item.avatarBg,
+  //         name: name,
+  //         image: item.image,
+  //         role: item.role,
+  //         email: email,
+  //         balance: formData.balance,
+  //         phone: "+" + phone,
+  //         emailStatus: item.emailStatus,
+  //         kycStatus: item.kycStatus,
+  //         lastLogin: item.lastLogin,
+  //         status: formData.status,
+  //         country: item.country,
+  //       };
+  //     }
+  //   });
+  //   let index = newitems.findIndex((item) => item.id === editId);
+  //   newitems[index] = submittedData;
+  //   setModal({ edit: false });
+  //   resetForm();
+  // };
 
   // function that loads the want to editted data
-  const onEditClick = (id) => {
-    data.forEach((item) => {
-      if (item.id === id) {
-        setFormData({
-          name: item.name,
-          email: item.email,
-          status: item.status,
-          phone: item.phone,
-          balance: item.balance,
-        });
-        setModal({ edit: true }, { add: false });
-        setEditedId(id);
-      }
-    });
-  };
+  // const onEditClick = (id) => {
+  //   data.forEach((item) => {
+  //     if (item.id === id) {
+  //       setFormData({
+  //         name: item.name,
+  //         email: item.email,
+  //         status: item.status,
+  //         phone: item.phone,
+  //         balance: item.balance,
+  //       });
+  //       setModal({ edit: true }, { add: false });
+  //       setEditedId(id);
+  //     }
+  //   });
+  // };
 
   // function to change to suspend property for an item
   const suspendUser = (id) => {
@@ -258,7 +259,7 @@ const UserListRegularPage = () => {
           <BlockBetween>
             <BlockHeadContent>
               <BlockTitle tag="h3" page>
-                Users Lists
+                Professions
               </BlockTitle>
               <BlockDes className="text-soft">
                 <p>You have total 2,595 users.</p>
@@ -274,12 +275,6 @@ const UserListRegularPage = () => {
                 </Button>
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    <li>
-                      <Button color="light" outline className="btn-white">
-                        <Icon name="download-cloud"></Icon>
-                        <span>Export</span>
-                      </Button>
-                    </li>
                     <li className="nk-block-tools-opt">
                       <Button color="primary" className="btn-icon" onClick={() => setModal({ add: true })}>
                         <Icon name="plus"></Icon>
@@ -574,22 +569,19 @@ const UserListRegularPage = () => {
                   </div>
                 </DataTableRow>
                 <DataTableRow>
-                  <span className="sub-text">User</span>
+                  <span className="sub-text">Profession</span>
                 </DataTableRow>
                 <DataTableRow size="mb">
-                  <span className="sub-text">Balance</span>
+                  <span className="sub-text">Complexity</span>
                 </DataTableRow>
                 <DataTableRow size="md">
-                  <span className="sub-text">Phone</span>
+                  <span className="sub-text">Start Salary</span>
                 </DataTableRow>
                 <DataTableRow size="lg">
-                  <span className="sub-text">Verified</span>
+                  <span className="sub-text">Avarage Salary</span>
                 </DataTableRow>
                 <DataTableRow size="lg">
-                  <span className="sub-text">Last Login</span>
-                </DataTableRow>
-                <DataTableRow size="md">
-                  <span className="sub-text">Status</span>
+                  <span className="sub-text">Hours to learn</span>
                 </DataTableRow>
                 <DataTableRow className="nk-tb-col-tools text-right">
                   <UncontrolledDropdown>
@@ -737,15 +729,6 @@ const UserListRegularPage = () => {
                         <DataTableRow size="lg">
                           <span>{item.lastLogin}</span>
                         </DataTableRow>
-                        <DataTableRow size="md">
-                          <span
-                            className={`tb-status text-${
-                              item.status === "Active" ? "success" : item.status === "Pending" ? "warning" : "danger"
-                            }`}
-                          >
-                            {item.status}
-                          </span>
-                        </DataTableRow>
                         <DataTableRow className="nk-tb-col-tools">
                           <ul className="nk-tb-actions gx-1">
                             <li className="nk-tb-action-hidden" onClick={() => onEditClick(item.id)}>
@@ -848,9 +831,9 @@ const UserListRegularPage = () => {
               <Icon name="cross-sm"></Icon>
             </a>
             <div className="p-2">
-              <h5 className="title">Add User</h5>
+              <h5 className="title">Add Profession</h5>
               <div className="mt-4">
-                <Form className="row gy-4" noValidate onSubmit={handleSubmit(onFormSubmit)}>
+                <Form className="row gy-4" noValidate onSubmit={handleSubmit(onAddProfession)}>
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label">Name</label>
@@ -867,61 +850,58 @@ const UserListRegularPage = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Email </label>
+                      <label className="form-label">Complexity </label>
                       <input
                         className="form-control"
                         type="text"
-                        name="email"
-                        defaultValue={formData.email}
-                        placeholder="Enter email"
+                        name="complexity"
+                        defaultValue={formData.complexity}
+                        placeholder="Complaxity"
                         ref={register({
                           required: "This field is required",
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: "invalid email address",
-                          },
                         })}
                       />
-                      {errors.email && <span className="invalid">{errors.email.message}</span>}
+                      {errors.complexity && <span className="invalid">{errors.complexity.message}</span>}
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Balance</label>
+                      <label className="form-label">Start Salary</label>
                       <input
                         className="form-control"
-                        type="number"
-                        name="balance"
-                        defaultValue={formData.balance}
-                        placeholder="Balance"
+                        type="text"
+                        name="startSalary"
+                        defaultValue={formData.startSalary}
+                        placeholder="Start Salary"
                         ref={register({ required: "This field is required" })}
                       />
-                      {errors.balance && <span className="invalid">{errors.balance.message}</span>}
+                      {errors.startSalary && <span className="invalid">{errors.startSalary.message}</span>}
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Phone</label>
+                      <label className="form-label">Avarage Salary</label>
                       <input
                         className="form-control"
-                        type="number"
-                        name="phone"
-                        defaultValue={formData.phone}
+                        type="text"
+                        name="avarageSalary"
+                        defaultValue={formData.avarageSalary}
                         ref={register({ required: "This field is required" })}
                       />
-                      {errors.phone && <span className="invalid">{errors.phone.message}</span>}
+                      {errors.avarageSalary && <span className="invalid">{errors.avarageSalary.message}</span>}
                     </FormGroup>
                   </Col>
-                  <Col md="12">
+                  <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Status</label>
-                      <div className="form-control-wrap">
-                        <RSelect
-                          options={filterStatus}
-                          defaultValue={{ value: "Active", label: "Active" }}
-                          onChange={(e) => setFormData({ ...formData, status: e.value })}
-                        />
-                      </div>
+                      <label className="form-label">Hours to Start</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="hours"
+                        defaultValue={formData.hours}
+                        ref={register({ required: "This field is required" })}
+                      />
+                      {errors.hours && <span className="invalid">{errors.hours.message}</span>}
                     </FormGroup>
                   </Col>
                   <Col size="12">
@@ -950,7 +930,7 @@ const UserListRegularPage = () => {
             </div>
           </ModalBody>
         </Modal>
-
+        {/* 
         <Modal isOpen={modal.edit} toggle={() => setModal({ edit: false })} className="modal-dialog-centered" size="lg">
           <ModalBody>
             <a
@@ -1069,9 +1049,9 @@ const UserListRegularPage = () => {
               </div>
             </div>
           </ModalBody>
-        </Modal>
+        </Modal> */}
       </Content>
     </React.Fragment>
   );
 };
-export default UserListRegularPage;
+export default ProfessionsDashboard;

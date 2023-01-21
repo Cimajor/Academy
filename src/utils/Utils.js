@@ -1,4 +1,4 @@
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 //url for production
 export var url = "";
@@ -123,7 +123,7 @@ export const truncate = (str, n) => {
 };
 
 export const RedirectAs404 = ({ location }) => (
-  <Redirect to={Object.assign({}, location, { state: { is404: true } })} />
+  <Navigate to={Object.assign({}, location, { state: { is404: true } })} />
 );
 
 // returns upload url
