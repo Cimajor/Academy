@@ -3,12 +3,12 @@ const menu = [
     icon: "dashlite",
     text: "Default Dashboard",
     link: "/",
-  }
-  // {
-  //   icon: "bitcoin-cash",
-  //   text: "Crypto Dashboard",
-  //   link: "/crypto",
-  // },
+  },
+  {
+    icon: "file-docs",
+    text: "Professions",
+    link: "/professions",
+  },
   // {
   //   icon: "growth",
   //   text: "Analytics Dashboard",

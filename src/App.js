@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RedirectAs404 } from "./utils/Utils";
 import PrivateRoute from "./route/PrivateRoute";
+import PublicRoute from "./route/PublicRoute";
 
 import Layout from "./layout/Index";
 
@@ -49,7 +50,7 @@ const App = () => {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route element={<Layout/>}>
+            <Route element={<Layout />}>
               <Route
                 exact
                 path={`${process.env.PUBLIC_URL}/`}
@@ -60,8 +61,35 @@ const App = () => {
                   </PrivateRoute>
                 }
               ></Route>
+              <Route
+                exact
+                path={`${process.env.PUBLIC_URL}/professions`}
+                element={
+                  <PrivateRoute>
+                    {" "}
+                    <ProfessionsDashboard />
+                  </PrivateRoute>
+                }
+              ></Route>
             </Route>
-            <Route exact path={`${process.env.PUBLIC_URL}/auth-login`} component={Login}></Route>
+            <Route
+              exact
+              path={`${process.env.PUBLIC_URL}/auth-login`}
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            ></Route>
+            <Route
+              exact
+              path={`${process.env.PUBLIC_URL}/auth-register`}
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            ></Route>
           </Routes>
         </AuthProvider>
       </Router>

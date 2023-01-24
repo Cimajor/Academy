@@ -85,29 +85,12 @@ import Calender from "../pages/app/calender/Calender";
 import DateTimePicker from "../pages/components/forms/DateTimePicker";
 
 import LandingPage from "../pages/landing/LandingPage";
-// import { AuthContextProvider, useAuthState } from "../utils/firebase";
+
 
 const Pages = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
-
-  // const AuthenticatedRoute = ({ component: C, ...props }) => {
-  //   const { isAuthenticated } = useAuthState();
-  //   console.log("__________", isAuthenticated);
-  //   return (
-  //     <Route
-  //       {...props}
-  //       render={(routeProps) => (isAuthenticated ? <C {...routeProps} /> : <Redirect to="/auth-login" />)}
-  //     />
-  //   );
-  // };
-  // const UnauthenticatedRoute = ({ component: C, ...props }) => {
-  //   const { isAuthenticated } = useAuthState();
-  //   return (
-  //     <Route {...props} render={(routeProps) => (!isAuthenticated ? <C {...routeProps} /> : <Redirect to="/" />)} />
-  //   );
-  // };
 
   return (
     // <Suspense fallback={<div />}>

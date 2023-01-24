@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
-// import { _CreateProfession } from "../../../utils/Api";
+import { _CreateProfession, _GetAllProfessions } from "../../../utils/Api";
 import {
   DropdownMenu,
   DropdownToggle,
@@ -41,7 +41,15 @@ import { useForm } from "react-hook-form";
 
 const ProfessionsDashboard = () => {
   // const { contextData } = useContext(UserContext);
-  // const [data, setData] = contextData;
+  const [data, setData] = useState([
+    // {
+    //   avarageSalary: "40 000",
+    //   complexit: "Hight",
+    //   hours: "123",
+    //   name: "BackEnd",
+    //   startSalary: "10 000",
+    // },
+  ]);
 
   const [sm, updateSm] = useState(false);
   const [tablesm, updateTableSm] = useState(false);
@@ -78,6 +86,7 @@ const ProfessionsDashboard = () => {
 
   // unselects the data on mount
   useEffect(() => {
+    const professions = getAllProfession();
     let newData;
     newData = userData.map((item) => {
       item.checked = false;
@@ -146,16 +155,25 @@ const ProfessionsDashboard = () => {
       avarageSalary: avarageSalary,
       hours: hours,
     };
-    try {
-      _CreateProfession(submittedData);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    _CreateProfession(submittedData);
     console.log(submittedData);
     setData([submittedData, ...data]);
     resetForm();
     setModal({ edit: false }, { add: false });
+  };
+
+  const getAllProfession = async () => {
+    const professionsArray = [];
+    await _GetAllProfessions("professions")
+      .then((res) =>
+        res.forEach((doc) => {
+          professionsArray.push(doc.data());
+          console.log(`+++++++${doc.id} => ${JSON.stringify(doc.data())}`);
+        })
+      )
+      .catch((err) => console.log(err));
+    setData(professionsArray);
+    console.log(professionsArray);
   };
 
   // submit function to update a new item
@@ -557,7 +575,7 @@ const ProfessionsDashboard = () => {
             </div>
             <DataTableBody>
               <DataTableHead>
-                <DataTableRow className="nk-tb-col-check">
+                {/* <DataTableRow className="nk-tb-col-check">
                   <div className="custom-control custom-control-sm custom-checkbox notext">
                     <input
                       type="checkbox"
@@ -567,7 +585,7 @@ const ProfessionsDashboard = () => {
                     />
                     <label className="custom-control-label" htmlFor="uid"></label>
                   </div>
-                </DataTableRow>
+                </DataTableRow> */}
                 <DataTableRow>
                   <span className="sub-text">Profession</span>
                 </DataTableRow>
@@ -583,7 +601,7 @@ const ProfessionsDashboard = () => {
                 <DataTableRow size="lg">
                   <span className="sub-text">Hours to learn</span>
                 </DataTableRow>
-                <DataTableRow className="nk-tb-col-tools text-right">
+                {/* <DataTableRow className="nk-tb-col-tools text-right">
                   <UncontrolledDropdown>
                     <DropdownToggle
                       color="tranparent"
@@ -628,14 +646,14 @@ const ProfessionsDashboard = () => {
                       </ul>
                     </DropdownMenu>
                   </UncontrolledDropdown>
-                </DataTableRow>
+                </DataTableRow> */}
               </DataTableHead>
               {/*Head*/}
-              {currentItems.length > 0
-                ? currentItems.map((item) => {
+              {data.length > 0
+                ? data.map((item) => {
                     return (
                       <DataTableItem key={item.id}>
-                        <DataTableRow className="nk-tb-col-check">
+                        {/* <DataTableRow className="nk-tb-col-check">
                           <div className="custom-control custom-control-sm custom-checkbox notext">
                             <input
                               type="checkbox"
@@ -647,9 +665,9 @@ const ProfessionsDashboard = () => {
                             />
                             <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
                           </div>
-                        </DataTableRow>
+                        </DataTableRow> */}
                         <DataTableRow>
-                          <Link to={`${process.env.PUBLIC_URL}/user-details-regular/${item.id}`}>
+                          {/* <Link to={`${process.env.PUBLIC_URL}/user-details-regular/${item.id}`}>
                             <div className="user-card">
                               <UserAvatar
                                 theme={item.avatarBg}
@@ -672,18 +690,16 @@ const ProfessionsDashboard = () => {
                                 <span>{item.email}</span>
                               </div>
                             </div>
-                          </Link>
+                          </Link> */}
+                          {item.name}
                         </DataTableRow>
                         <DataTableRow size="mb">
-                          <span className="tb-amount">
-                            {item.balance} <span className="currency">USD</span>
-                          </span>
-                        </DataTableRow>
-                        <DataTableRow size="md">
-                          <span>{item.phone}</span>
+                          <span className="tb-amount">{item.complexity}</span>
                         </DataTableRow>
                         <DataTableRow size="lg">
-                          <ul className="list-status">
+                        <span className="currency">{item.startSalary} USD</span>
+
+                          {/* <ul className="list-status">
                             <li>
                               <Icon
                                 className={`text-${
@@ -724,13 +740,14 @@ const ProfessionsDashboard = () => {
                               ></Icon>{" "}
                               <span>KYC</span>
                             </li>
-                          </ul>
+                          </ul> */}
                         </DataTableRow>
                         <DataTableRow size="lg">
-                          <span>{item.lastLogin}</span>
+  <span className="currency">{item.avarageSalary} USD</span>
                         </DataTableRow>
                         <DataTableRow className="nk-tb-col-tools">
-                          <ul className="nk-tb-actions gx-1">
+                          <span>{item.hours}</span>
+                          {/* <ul className="nk-tb-actions gx-1">
                             <li className="nk-tb-action-hidden" onClick={() => onEditClick(item.id)}>
                               <TooltipComponent
                                 tag="a"
@@ -795,7 +812,7 @@ const ProfessionsDashboard = () => {
                                 </DropdownMenu>
                               </UncontrolledDropdown>
                             </li>
-                          </ul>
+                          </ul> */}
                         </DataTableRow>
                       </DataTableItem>
                     );
@@ -908,7 +925,7 @@ const ProfessionsDashboard = () => {
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                       <li>
                         <Button color="primary" size="md" type="submit">
-                          Add User
+                          Add Profession
                         </Button>
                       </li>
                       <li>

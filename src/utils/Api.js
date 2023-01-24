@@ -1,8 +1,9 @@
 import axios from "axios";
-import firebase from './firebase'
+import firebase from "./firebase";
+import FirebaseFirestoreService from "./FirebaseFirestoreService";
+import { doc, setDoc } from "firebase/firestore"; 
 
 const auth = firebase.auth;
-
 
 const userID = "24fSmp7Jmc7nWnniwtQB3fb3JORSDGZ24X8uXORb";
 const userSecret =
@@ -44,7 +45,11 @@ export const _GetListOfSources = (skillName) => {
 //   return db.collection(collection).document(document);
 // };
 
-// export const _CreateProfession = (body) => {
-//   db.createDocument("companies", body);
-//   // createDocument("companies", body);
-// };
+export const _CreateProfession = (body) => {
+  FirebaseFirestoreService.createDocument("professions", body);
+  // createDocument("companies", body);
+};
+
+export const _GetAllProfessions = (profetion) => {
+  return FirebaseFirestoreService.readDocuments(profetion)
+}

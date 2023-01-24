@@ -19,15 +19,17 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "../../utils/Database";
+import { useAuth } from "../../context/AuthContext";
 
 const Register = ({ history }) => {
   const [passState, setPassState] = useState(false);
   const [loading, setLoading] = useState(false);
   const { errors, register, handleSubmit } = useForm();
+  const { signup } = useAuth();
 
   const handleFormSubmit = (formData) => {
     setLoading(true);
-
+    signup(formData.email, formData.passcode)
 
   // createUserWithEmailAndPassword(auth, formData.email, formData.passcode)
   // .then((userCredential) => {
