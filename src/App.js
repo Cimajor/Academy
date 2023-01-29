@@ -44,7 +44,7 @@ import InvoicePrint from "./pages/pre-built/invoice/InvoicePrint";
 import { AuthProvider } from "./context/AuthContext";
 import NewHomepage from "./pages/NewHomePage";
 import ProfessionsDashboard from "./pages/pre-built/user-manage/ProfessionsDashboard";
-import ProfessionDetails from './pages/custom-pages/professions/profession-details/profession-details'
+import ProfessionDetails from "./pages/custom-pages/professions/profession-details/profession-details";
 
 // const auth = getAuth();
 // const user = auth.currentUser;
@@ -96,6 +96,15 @@ const App = () => {
                 element={
                   <PrivateRoute>
                     <ProfessionDetails />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                exact
+                path={`${process.env.PUBLIC_URL}/111`}
+                element={
+                  <PrivateRoute>
+                    <UserDetailsPage />
                   </PrivateRoute>
                 }
               ></Route>
