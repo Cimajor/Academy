@@ -65,11 +65,15 @@ export const _AddSkillToProfession = (professionId, arrayToPush, valueToPush) =>
   return FirebaseFirestoreService.addValueToArray("professions", professionId, arrayToPush, valueToPush);
 };
 
-export const  _getProfessionSkillsData = async (arrayOfIds) => {
-  return await FirebaseFirestoreService.readDocumentsbyQuery("skills", arrayOfIds)
+export const _getProfessionSkillsData = async (arrayOfIds) => {
+  return await FirebaseFirestoreService.readDocumentsbyQuery("skills", arrayOfIds);
 };
 
 //Skills
+
+export const _getSkillProfessionsData = async (skillId) => {
+  return await FirebaseFirestoreService.readProfessionsRelatedToSkill("professions", skillId);
+};
 
 export const _CreateSkill = async (body) => {
   return await FirebaseFirestoreService.createDocument("skills", body);

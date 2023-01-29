@@ -50,6 +50,19 @@ const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
   }
 };
 
+const readProfessionsRelatedToSkill = async (collectionId, skillId) => {
+  const q = query(
+    collection(firestore, collectionId),
+    where("skills", "array-contains", skillId)
+  );
+  try {
+    const querySnapshot = await getDocs(q);
+    return querySnapshot;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const updateDocument = async (collection, professionId, updateBody) => {
   const collectionToUpdate = doc(firestore, collection, professionId);
   await updateDoc(collectionToUpdate, updateBody);
@@ -74,6 +87,7 @@ const FirebaseFirestoreService = {
   addValueToArray,
   readDocument,
   readDocumentsbyQuery,
+  readProfessionsRelatedToSkill
 };
 
 export default FirebaseFirestoreService;

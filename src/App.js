@@ -45,6 +45,7 @@ import { AuthProvider } from "./context/AuthContext";
 import NewHomepage from "./pages/NewHomePage";
 import ProfessionsDashboard from "./pages/pre-built/user-manage/ProfessionsDashboard";
 import ProfessionDetails from "./pages/custom-pages/professions/profession-details/profession-details";
+import SkillDetailsPage from "./pages/custom-pages/professions/skills-details/skills-details";
 
 // const auth = getAuth();
 // const user = auth.currentUser;
@@ -101,10 +102,10 @@ const App = () => {
               ></Route>
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/111`}
+                path={`${process.env.PUBLIC_URL}/skills/:id`}
                 element={
                   <PrivateRoute>
-                    <UserDetailsPage />
+                    <SkillDetailsPage />
                   </PrivateRoute>
                 }
               ></Route>
