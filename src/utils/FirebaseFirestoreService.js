@@ -1,60 +1,65 @@
 import { firestore } from "./firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+  arrayUnion,
+  getDoc,
+  query,
+  where,
+  documentId,
+} from "firebase/firestore";
 
 // const firestore = firebase.firestore();
 
 const createDocument = async (collectionToCreate, document) => {
-  //   return firestore.collection(collection).add(document);
-
-  // Add a new document in collection "cities"
-  try {
-    const docRef = await addDoc(collection(firestore, collectionToCreate), document);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+  const docRef = await addDoc(collection(firestore, collectionToCreate), document);
+  return docRef;
 };
 
-const readDocuments = async (collectionName) => {
+const readCollection = async (collectionName) => {
   try {
     const querySnapshot = await getDocs(collection(firestore, collectionName));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    });
     return querySnapshot;
   } catch (e) {
     console.error(e);
   }
 };
 
-// const readDocuments = async ({ collection, queries, orderByField, orderByDirection, perPage, cursorId }) => {
-//   let collectionRef = firestore.collection(collection);
+const readDocument = async (collectionName, documentId) => {
+  try {
+    const documentToGet = doc(firestore, collectionName, documentId);
+    return await getDoc(documentToGet);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-//   if (queries && queries.length > 0) {
-//     for (const query of queries) {
-//       collectionRef = collectionRef.where(query.field, query.condition, query.value);
-//     }
-//   }
+const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
+  const q = query(
+    collection(firestore, collectionId),
+    where(documentId(), "in", arrayOfWalues)
+  );
+  try {
+    const querySnapshot = await getDocs(q);
+    return querySnapshot;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-//   if (orderByField && orderByDirection) {
-//     collectionRef = collectionRef.orderBy(orderByField, orderByDirection);
-//   }
+const updateDocument = async (collection, professionId, updateBody) => {
+  const collectionToUpdate = doc(firestore, collection, professionId);
+  await updateDoc(collectionToUpdate, updateBody);
+};
 
-//   if (perPage) {
-//     collectionRef = collectionRef.limit(perPage);
-//   }
-
-//   if (cursorId) {
-//     const document = await readDocument(collection, cursorId);
-
-//     collectionRef = collectionRef.startAfter(document);
-//   }
-
-//   return collectionRef.get();
-// };
-
-const updateDocument = (collection, id, document) => {
-  return firestore.collection(collection).doc(id).update(document);
+const addValueToArray = async (collection, professionId, array, value) => {
+  const collectionToUpdate = doc(firestore, collection, professionId);
+  await updateDoc(collectionToUpdate, {
+    [array]: arrayUnion(value),
+  });
 };
 
 const deleteDocument = (collection, id) => {
@@ -63,9 +68,12 @@ const deleteDocument = (collection, id) => {
 
 const FirebaseFirestoreService = {
   createDocument,
-  readDocuments,
+  readCollection,
   updateDocument,
   deleteDocument,
+  addValueToArray,
+  readDocument,
+  readDocumentsbyQuery,
 };
 
 export default FirebaseFirestoreService;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import firebase from "./firebase";
 import FirebaseFirestoreService from "./FirebaseFirestoreService";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
 
 const auth = firebase.auth;
 
@@ -45,11 +45,41 @@ export const _GetListOfSources = (skillName) => {
 //   return db.collection(collection).document(document);
 // };
 
+//Professions
+
 export const _CreateProfession = (body) => {
   FirebaseFirestoreService.createDocument("professions", body);
   // createDocument("companies", body);
 };
 
 export const _GetAllProfessions = (profetion) => {
-  return FirebaseFirestoreService.readDocuments(profetion)
-}
+  return FirebaseFirestoreService.readCollection(profetion);
+};
+
+export const _getProfessionById = (professionId) => {
+  console.log(professionId);
+  return FirebaseFirestoreService.readDocument("professions", professionId);
+};
+
+export const _AddSkillToProfession = (professionId, arrayToPush, valueToPush) => {
+  return FirebaseFirestoreService.addValueToArray("professions", professionId, arrayToPush, valueToPush);
+};
+
+export const  _getProfessionSkillsData = async (arrayOfIds) => {
+  return await FirebaseFirestoreService.readDocumentsbyQuery("skills", arrayOfIds)
+};
+
+//Skills
+
+export const _CreateSkill = async (body) => {
+  return await FirebaseFirestoreService.createDocument("skills", body);
+  // createDocument("companies", body);
+};
+
+export const _GetAllSkills = async () => {
+  return await FirebaseFirestoreService.readCollection("skills");
+};
+
+export const _GetSkillById = async (skillId) => {
+  return FirebaseFirestoreService.readDocument("skills", skillId);
+};

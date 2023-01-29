@@ -33,23 +33,13 @@ import {
   TooltipComponent,
   RSelect,
 } from "../../../components/Component";
-import { filterRole, filterStatus, userData } from "./UserData";
 import { bulkActionOptions, findUpper } from "../../../utils/Utils";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import { UserContext } from "./UserContext";
 
 const ProfessionsDashboard = () => {
-  // const { contextData } = useContext(UserContext);
-  const [data, setData] = useState([
-    // {
-    //   avarageSalary: "40 000",
-    //   complexit: "Hight",
-    //   hours: "123",
-    //   name: "BackEnd",
-    //   startSalary: "10 000",
-    // },
-  ]);
+  const [data, setData] = useState([]);
 
   const [sm, updateSm] = useState(false);
   const [tablesm, updateTableSm] = useState(false);
@@ -87,12 +77,12 @@ const ProfessionsDashboard = () => {
   // unselects the data on mount
   useEffect(() => {
     const professions = getAllProfession();
-    let newData;
-    newData = userData.map((item) => {
-      item.checked = false;
-      return item;
-    });
-    setData([...newData]);
+    // let newData;
+    // newData = userData.map((item) => {
+    //   item.checked = false;
+    //   return item;
+    // });
+    // setData([...newData]);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Changing state value when searching name
@@ -106,7 +96,7 @@ const ProfessionsDashboard = () => {
       });
       setData([...filteredObject]);
     } else {
-      setData([...userData]);
+      // setData([...userData]);
     }
   }, [onSearchText, setData]);
 
@@ -154,6 +144,7 @@ const ProfessionsDashboard = () => {
       startSalary: startSalary,
       avarageSalary: avarageSalary,
       hours: hours,
+      skills: [],
     };
     _CreateProfession(submittedData);
     console.log(submittedData);
@@ -165,12 +156,13 @@ const ProfessionsDashboard = () => {
   const getAllProfession = async () => {
     const professionsArray = [];
     await _GetAllProfessions("professions")
-      .then((res) =>
+      .then((res) => {
         res.forEach((doc) => {
-          professionsArray.push(doc.data());
-          console.log(`+++++++${doc.id} => ${JSON.stringify(doc.data())}`);
-        })
-      )
+          const newProfessionObject = doc.data();
+          const objectWithId = { ...newProfessionObject, id: doc.id };
+          professionsArray.push(objectWithId);
+        });
+      })
       .catch((err) => console.log(err));
     setData(professionsArray);
     console.log(professionsArray);
@@ -345,7 +337,7 @@ const ProfessionsDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="card-tools mr-n1">
+                {/* <div className="card-tools mr-n1">
                   <ul className="btn-toolbar gx-1">
                     <li>
                       <a
@@ -545,7 +537,7 @@ const ProfessionsDashboard = () => {
                       </div>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
               <div className={`card-search search-wrap ${!onSearch && "active"}`}>
                 <div className="card-body">
@@ -653,166 +645,20 @@ const ProfessionsDashboard = () => {
                 ? data.map((item) => {
                     return (
                       <DataTableItem key={item.id}>
-                        {/* <DataTableRow className="nk-tb-col-check">
-                          <div className="custom-control custom-control-sm custom-checkbox notext">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-control"
-                              defaultChecked={item.checked}
-                              id={item.id + "uid1"}
-                              key={Math.random()}
-                              onChange={(e) => onSelectChange(e, item.id)}
-                            />
-                            <label className="custom-control-label" htmlFor={item.id + "uid1"}></label>
-                          </div>
-                        </DataTableRow> */}
                         <DataTableRow>
-                          {/* <Link to={`${process.env.PUBLIC_URL}/user-details-regular/${item.id}`}>
-                            <div className="user-card">
-                              <UserAvatar
-                                theme={item.avatarBg}
-                                text={findUpper(item.name)}
-                                image={item.image}
-                              ></UserAvatar>
-                              <div className="user-info">
-                                <span className="tb-lead">
-                                  {item.name}{" "}
-                                  <span
-                                    className={`dot dot-${
-                                      item.status === "Active"
-                                        ? "success"
-                                        : item.status === "Pending"
-                                        ? "warning"
-                                        : "danger"
-                                    } d-md-none ml-1`}
-                                  ></span>
-                                </span>
-                                <span>{item.email}</span>
-                              </div>
-                            </div>
-                          </Link> */}
-                          {item.name}
+                          <Link to={`/professions/${item.id}`}>{item.name}</Link>
                         </DataTableRow>
                         <DataTableRow size="mb">
                           <span className="tb-amount">{item.complexity}</span>
                         </DataTableRow>
                         <DataTableRow size="lg">
-                        <span className="currency">{item.startSalary} USD</span>
-
-                          {/* <ul className="list-status">
-                            <li>
-                              <Icon
-                                className={`text-${
-                                  item.emailStatus === "success"
-                                    ? "success"
-                                    : item.emailStatus === "pending"
-                                    ? "info"
-                                    : "secondary"
-                                }`}
-                                name={`${
-                                  item.emailStatus === "success"
-                                    ? "check-circle"
-                                    : item.emailStatus === "alert"
-                                    ? "alert-circle"
-                                    : "alarm-alt"
-                                }`}
-                              ></Icon>{" "}
-                              <span>Email</span>
-                            </li>
-                            <li>
-                              <Icon
-                                className={`text-${
-                                  item.kycStatus === "success"
-                                    ? "success"
-                                    : item.kycStatus === "pending"
-                                    ? "info"
-                                    : item.kycStatus === "warning"
-                                    ? "warning"
-                                    : "secondary"
-                                }`}
-                                name={`${
-                                  item.kycStatus === "success"
-                                    ? "check-circle"
-                                    : item.kycStatus === "pending"
-                                    ? "alarm-alt"
-                                    : "alert-circle"
-                                }`}
-                              ></Icon>{" "}
-                              <span>KYC</span>
-                            </li>
-                          </ul> */}
+                          <span className="currency">{item.startSalary} USD</span>
                         </DataTableRow>
                         <DataTableRow size="lg">
-  <span className="currency">{item.avarageSalary} USD</span>
+                          <span className="currency">{item.avarageSalary} USD</span>
                         </DataTableRow>
                         <DataTableRow className="nk-tb-col-tools">
                           <span>{item.hours}</span>
-                          {/* <ul className="nk-tb-actions gx-1">
-                            <li className="nk-tb-action-hidden" onClick={() => onEditClick(item.id)}>
-                              <TooltipComponent
-                                tag="a"
-                                containerClassName="btn btn-trigger btn-icon"
-                                id={"edit" + item.id}
-                                icon="edit-alt-fill"
-                                direction="top"
-                                text="Edit"
-                              />
-                            </li>
-                            {item.status !== "Suspend" && (
-                              <React.Fragment>
-                                <li className="nk-tb-action-hidden" onClick={() => suspendUser(item.id)}>
-                                  <TooltipComponent
-                                    tag="a"
-                                    containerClassName="btn btn-trigger btn-icon"
-                                    id={"suspend" + item.id}
-                                    icon="user-cross-fill"
-                                    direction="top"
-                                    text="Suspend"
-                                  />
-                                </li>
-                              </React.Fragment>
-                            )}
-                            <li>
-                              <UncontrolledDropdown>
-                                <DropdownToggle tag="a" className="dropdown-toggle btn btn-icon btn-trigger">
-                                  <Icon name="more-h"></Icon>
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                  <ul className="link-list-opt no-bdr">
-                                    <li onClick={() => onEditClick(item.id)}>
-                                      <DropdownItem
-                                        tag="a"
-                                        href="#edit"
-                                        onClick={(ev) => {
-                                          ev.preventDefault();
-                                        }}
-                                      >
-                                        <Icon name="edit"></Icon>
-                                        <span>Edit</span>
-                                      </DropdownItem>
-                                    </li>
-                                    {item.status !== "Suspend" && (
-                                      <React.Fragment>
-                                        <li className="divider"></li>
-                                        <li onClick={() => suspendUser(item.id)}>
-                                          <DropdownItem
-                                            tag="a"
-                                            href="#suspend"
-                                            onClick={(ev) => {
-                                              ev.preventDefault();
-                                            }}
-                                          >
-                                            <Icon name="na"></Icon>
-                                            <span>Suspend User</span>
-                                          </DropdownItem>
-                                        </li>
-                                      </React.Fragment>
-                                    )}
-                                  </ul>
-                                </DropdownMenu>
-                              </UncontrolledDropdown>
-                            </li>
-                          </ul> */}
                         </DataTableRow>
                       </DataTableItem>
                     );

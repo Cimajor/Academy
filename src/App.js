@@ -3,6 +3,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RedirectAs404 } from "./utils/Utils";
 import PrivateRoute from "./route/PrivateRoute";
 import PublicRoute from "./route/PublicRoute";
+import ProjectCardPage from "./pages/pre-built/projects/ProjectCard";
+import ProjectListPage from "./pages/pre-built/projects/ProjectList";
+
+import UserContactCardPage from "./pages/pre-built/user-manage/UserContactCard";
+import UserDetailsPage from "./pages/pre-built/user-manage/UserDetailsRegular";
+import UserListCompact from "./pages/pre-built/user-manage/UserListCompact";
+import UserProfileLayout from "./pages/pre-built/user-manage/UserProfileLayout";
+import KycListRegular from "./pages/pre-built/kyc-list-regular/KycListRegular";
+import KycDetailsRegular from "./pages/pre-built/kyc-list-regular/kycDetailsRegular";
+import TransListBasic from "./pages/pre-built/trans-list/TransListBasic";
+import TransListCrypto from "./pages/pre-built/trans-list/TransListCrypto";
+import ProductCard from "./pages/pre-built/products/ProductCard";
+import ProductList from "./pages/pre-built/products/ProductList";
+import ProductDetails from "./pages/pre-built/products/ProductDetails";
+import InvoiceList from "./pages/pre-built/invoice/InvoiceList";
+import InvoiceDetails from "./pages/pre-built/invoice/InvoiceDetails";
+import PricingTable from "./pages/pre-built/pricing-table/PricingTable";
+import Gallery from "./pages/pre-built/gallery/GalleryCard";
 
 import Layout from "./layout/Index";
 
@@ -26,6 +44,7 @@ import InvoicePrint from "./pages/pre-built/invoice/InvoicePrint";
 import { AuthProvider } from "./context/AuthContext";
 import NewHomepage from "./pages/NewHomePage";
 import ProfessionsDashboard from "./pages/pre-built/user-manage/ProfessionsDashboard";
+import ProfessionDetails from './pages/custom-pages/professions/profession-details/profession-details'
 
 // const auth = getAuth();
 // const user = auth.currentUser;
@@ -68,6 +87,15 @@ const App = () => {
                   <PrivateRoute>
                     {" "}
                     <ProfessionsDashboard />
+                  </PrivateRoute>
+                }
+              ></Route>
+              <Route
+                exact
+                path={`${process.env.PUBLIC_URL}/professions/:id`}
+                element={
+                  <PrivateRoute>
+                    <ProfessionDetails />
                   </PrivateRoute>
                 }
               ></Route>
