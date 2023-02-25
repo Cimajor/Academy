@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserAvatar from "../../../../components/user/UserAvatar";
 import { DropdownToggle, DropdownMenu, Dropdown } from "reactstrap";
 import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import { useAuth } from "../../../../context/AuthContext";
+import { _GetUserRole } from "../../../../utils/Api";
+import { useAuthContext, setUserRole, useUserDispatch } from "../../../../context/AuthContextProvider";
 
 const User = () => {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
-  const { logout } = useAuth();
+  const { logout, currentUser } = useAuth();
+  const userDispatch = useUserDispatch();
+  const { roles } = useAuthContext();
+  // const [userRoles, setUserRoles] = useState(roles);
+
+  useEffect(() => {
+    console.log("fffff", roles);
+    getUserData();
+  }, []);
+
+  const getUserData = () => {
+    _GetUserRole(currentUser.uid)
+      .then((res) => {
+        const listOfRoles = [];
+        res.forEach((doc) => {
+          listOfRoles.push(doc.data().data.userData.role);
+        });
+        console.log(listOfRoles);
+        setUserRole(userDispatch, listOfRoles);
+        // setUserRoles(listOfRoles);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleSignout = () => {
-    logout()
+    logout();
   };
 
   return (
@@ -27,11 +51,12 @@ const User = () => {
         <div className="user-toggle">
           <UserAvatar icon="user-alt" className="sm" />
           <div className="user-info d-none d-md-block">
-            <div className="user-status">Administrator</div>
+            <div className="user-status">{roles ? roles.map((item) => item) : "nima"}</div>
             <div className="user-name dropdown-indicator">Illia Milevskiy</div>
           </div>
         </div>
       </DropdownToggle>
+      {console.log(roles)}
       <DropdownMenu right className="dropdown-menu-md dropdown-menu-s1">
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
           <div className="user-card sm">

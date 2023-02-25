@@ -85,7 +85,6 @@ const SkillDetails = ({ match }) => {
 
   return (
     <React.Fragment>
-      <div>Skills Details</div>
       <Head title="User Details - Regular"></Head>
       {skillDetails && (
         <Content>
@@ -93,18 +92,8 @@ const SkillDetails = ({ match }) => {
             <BlockBetween>
               <BlockHeadContent>
                 <BlockTitle tag="h3" page>
-                  Users / <strong className="text-primary small">User</strong>
+                  Skills / <strong className="text-primary small">{skillDetails.title}</strong>
                 </BlockTitle>
-                <BlockDes className="text-soft">
-                  <ul className="list-inline">
-                    <li>
-                      User ID: <span className="text-base">UD003054</span>
-                    </li>
-                    <li>
-                      Last Login: <span className="text-base">Uer 01:02 PM</span>
-                    </li>
-                  </ul>
-                </BlockDes>
               </BlockHeadContent>
               <BlockHeadContent>
                 <Button
@@ -237,7 +226,7 @@ const SkillDetails = ({ match }) => {
                     </li>
                   </ul>
                   {skillDetails && activeTab.general ? <GeneralSkillInfo skillInfoData={skillDetails} /> : ""}
-                  {skillDetails && activeTab.professions ? <SkillProfessions /> : ""}
+                  {skillDetails && activeTab.professions ? <SkillProfessions skillTitle={skillDetails.title} /> : ""}
                 </div>
 
                 <Modal

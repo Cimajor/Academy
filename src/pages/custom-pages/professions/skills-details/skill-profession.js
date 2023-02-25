@@ -39,7 +39,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 // import { UserContext } from "./UserContext";
 
-const SkillProfessions = () => {
+const SkillProfessions = ({skillTitle}) => {
   const [data, setData] = useState([]);
   const { id } = useParams();
 
@@ -274,11 +274,8 @@ const SkillProfessions = () => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle tag="h3" page>
-                Professions
-              </BlockTitle>
               <BlockDes className="text-soft">
-                <p>You have total 2,595 users.</p>
+                <p>Where {skillTitle} can be useful</p>
               </BlockDes>
             </BlockHeadContent>
             <BlockHeadContent>

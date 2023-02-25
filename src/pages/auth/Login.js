@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Logo from "../../images/logo.png";
-
 import LogoSchoolless from "../../images/Schoolless_logo_1.png";
 import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
@@ -18,10 +16,6 @@ import {
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link, Outlet } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../utils/firebase";
-import FirebaaseAuthService from "../../utils/FireBaseAuth";
-import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -30,26 +24,6 @@ const Login = () => {
   const [errorVal, setError] = useState("");
   const { login } = useAuth();
 
-  // const onFormSubmit = (formData) => {
-  //   console.log(formData);
-
-  //   signInWithEmailAndPassword(auth, formData.name, formData.passcode)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       localStorage.setItem("accessToken", userCredential._tokenResponse.idToken);
-  //       window.history.pushState(
-  //         `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-  //         "auth-login",
-  //         `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-  //       );
-  //       window.location.reload();
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       setError(`Cannot login with credentials`, errorCode + " " + errorMessage);
-  //       // ..
-  //     });
 
   const onFormSubmit = (formData) => {
     try {

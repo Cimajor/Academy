@@ -1,24 +1,8 @@
-// import React, { useState, createContext, useE } from "react";
-// import { userData } from "./UserData";
-
-// export const UserContext = createContext();
-
-// export const UserContextProvider = (props) => {
-//   const [data, setData] = useState(userData);
-
-//   const [user, setUser] = useState(null);
-//   FirebaaseAuthService.subscribeToAuthChanges(setUser);
-
-//   useEffect(() => {
-//     console.log(user);
-//   }, [user]);
-
-//   return <UserContext.Provider value={{ contextData: [data, setData] }}>{props.children}</UserContext.Provider>;
-// };
-
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { firestore } from "../utils/firebase";
+import { _CreateUser } from "../utils/Api";
 
 const AuthContext = React.createContext();
 
@@ -31,7 +15,13 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
-    return createUserWithEmailAndPassword(auth,email, password);
+    return createUserWithEmailAndPassword(auth, email, password).then((registeredUser) => {
+      _CreateUser(registeredUser.user.uid, {
+        email: registeredUser.user.email,
+        role: "User",
+        anotherField: "Another Info...",
+      }).then((res) => console.log(res));
+    });
   }
 
   function login(email, password) {

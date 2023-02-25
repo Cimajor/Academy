@@ -24,6 +24,7 @@
     "classnames": "^2.3.1",
     "d3-dsv": "^3.0.1",
     "firebase": "^9.15.0",
+    "firebase-admin": "^11.5.0",
     "froala-editor": "^4.0.10",
     "html-react-parser": "^1.2.8",
     "mongodb": "^4.13.0",

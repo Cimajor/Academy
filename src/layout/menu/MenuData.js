@@ -9,11 +9,11 @@ const menu = [
     text: "Professions",
     link: "/professions",
   },
-  // {
-  //   icon: "growth",
-  //   text: "Analytics Dashboard",
-  //   link: "/analytics",
-  // },
+  {
+    icon: "growth",
+    text: "Skills",
+    link: "/skills",
+  },
   // {
   //   icon: "coins",
   //   text: "Invest Dashboard",

@@ -42,130 +42,103 @@ import InvoicePrint from "./pages/pre-built/invoice/InvoicePrint";
 // import { getAuth } from "firebase/auth";
 // import { AuthContextProvider, useAuthState } from "./utils/firebase";
 import { AuthProvider } from "./context/AuthContext";
+import { AuthContextProvider } from "./context/AuthContextProvider";
 import NewHomepage from "./pages/NewHomePage";
 import ProfessionsDashboard from "./pages/pre-built/user-manage/ProfessionsDashboard";
 import ProfessionDetails from "./pages/custom-pages/professions/profession-details/profession-details";
 import SkillDetailsPage from "./pages/custom-pages/professions/skills-details/skills-details";
+import Skills from "./pages/custom-pages/skills/skills";
+import MainFrontend from "./pages/frontend/MainFrontend";
 
-// const auth = getAuth();
-// const user = auth.currentUser;
-
-// const AuthenticatedRoute = ({ component: C, ...props }) => {
-//   const { isAuthenticated } = useAuthState();
-//   console.log("__________", isAuthenticated);
-//   return (
-//     <Route
-//       {...props}
-//       render={(routeProps) => (isAuthenticated ? <C {...routeProps} /> : <Redirect to="/auth-login" />)}
-//     />
-//   );
-// };
-// const UnauthenticatedRoute = ({ component: C, ...props }) => {
-//   const { isAuthenticated } = useAuthState();
-//   return <Route {...props} render={(routeProps) => (!isAuthenticated ? <C {...routeProps} /> : <Redirect to="/" />)} />;
-// };
 const App = () => {
   return (
     <>
       <Router>
         <AuthProvider>
-          <Routes>
-            <Route element={<Layout />}>
+          <AuthContextProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/`}
+                  element={
+                    <PrivateRoute>
+                      {" "}
+                      <NewHomepage />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/professions`}
+                  element={
+                    <PrivateRoute>
+                      {" "}
+                      <ProfessionsDashboard />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/professions/:id`}
+                  element={
+                    <PrivateRoute>
+                      <ProfessionDetails />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/skills`}
+                  element={
+                    <PrivateRoute>
+                      {" "}
+                      <Skills />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/frontend`}
+                  element={
+                    <PrivateRoute>
+                      {" "}
+                      <MainFrontend />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/skills/:id`}
+                  element={
+                    <PrivateRoute>
+                      <SkillDetailsPage />
+                    </PrivateRoute>
+                  }
+                ></Route>
+              </Route>
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/`}
+                path={`${process.env.PUBLIC_URL}/auth-login`}
                 element={
-                  <PrivateRoute>
-                    {" "}
-                    <NewHomepage />
-                  </PrivateRoute>
+                  <PublicRoute>
+                    <Login />
+                  </PublicRoute>
                 }
               ></Route>
               <Route
                 exact
-                path={`${process.env.PUBLIC_URL}/professions`}
+                path={`${process.env.PUBLIC_URL}/auth-register`}
                 element={
-                  <PrivateRoute>
-                    {" "}
-                    <ProfessionsDashboard />
-                  </PrivateRoute>
+                  <PublicRoute>
+                    <Register />
+                  </PublicRoute>
                 }
               ></Route>
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/professions/:id`}
-                element={
-                  <PrivateRoute>
-                    <ProfessionDetails />
-                  </PrivateRoute>
-                }
-              ></Route>
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL}/skills/:id`}
-                element={
-                  <PrivateRoute>
-                    <SkillDetailsPage />
-                  </PrivateRoute>
-                }
-              ></Route>
-            </Route>
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/auth-login`}
-              element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              }
-            ></Route>
-            <Route
-              exact
-              path={`${process.env.PUBLIC_URL}/auth-register`}
-              element={
-                <PublicRoute>
-                  <Register />
-                </PublicRoute>
-              }
-            ></Route>
-          </Routes>
+            </Routes>
+          </AuthContextProvider>
         </AuthProvider>
       </Router>
-      {/* <AuthenticatedRoute
-        exact
-        path={`${process.env.PUBLIC_URL}/professions`}
-        component={ProfessionsDashboard}
-      ></AuthenticatedRoute>
-      <UnauthenticatedRoute
-        exact
-        path={`${process.env.PUBLIC_URL}/auth-login`}
-        component={Login}
-      ></UnauthenticatedRoute> */}
-
-      {/* <Switch>
-
-        <Route exact path={`${process.env.PUBLIC_URL}/auth-success`} component={Success}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/auth-reset`} component={ForgotPassword}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/auth-register`} component={Register}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/auth-login`} component={Login}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/landing`} component={LandingPage}></Route>
-
-
-        <Route exact path={`${process.env.PUBLIC_URL}/invoice-print/:id`} component={InvoicePrint}></Route>
-
-        <Route exact path={`${process.env.PUBLIC_URL}/auths/terms`} component={Terms}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/auths/faq`} component={Faq}></Route>
-
-        <Route exact path={`${process.env.PUBLIC_URL}/invoice-print`} component={InvoicePrint}></Route>
-
-        <Route exact path={`${process.env.PUBLIC_URL}/errors/404-classic`} component={Error404Classic}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/errors/504-modern`} component={Error504Modern}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/errors/404-modern`} component={Error404Modern}></Route>
-        <Route exact path={`${process.env.PUBLIC_URL}/errors/504-classic`} component={Error504Classic}></Route>
-
-
-        <Route component={RedirectAs404}></Route>
-      </Switch> */}
     </>
   );
 };

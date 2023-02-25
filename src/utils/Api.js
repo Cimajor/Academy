@@ -1,9 +1,6 @@
 import axios from "axios";
-import firebase from "./firebase";
 import FirebaseFirestoreService from "./FirebaseFirestoreService";
-import { doc, setDoc } from "firebase/firestore";
 
-const auth = firebase.auth;
 
 const userID = "24fSmp7Jmc7nWnniwtQB3fb3JORSDGZ24X8uXORb";
 const userSecret =
@@ -87,3 +84,11 @@ export const _GetAllSkills = async () => {
 export const _GetSkillById = async (skillId) => {
   return FirebaseFirestoreService.readDocument("skills", skillId);
 };
+
+export const _CreateUser = async (userId, body) => {
+  return await FirebaseFirestoreService.createDocument("users", {uid: userId, data: body});
+}
+
+export const _GetUserRole = async (userId) => {
+  return await FirebaseFirestoreService.readQueryWhere("users", "uid", userId);
+}
