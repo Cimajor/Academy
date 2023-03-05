@@ -4,10 +4,12 @@ import SimpleBar from "simplebar-react";
 import Logo from "../logo/Logo";
 import Menu from "../menu/Menu";
 import Toggle from "./Toggle";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 const Sidebar = ({ fixed, theme, className, sidebarToggle, mobileView, ...props }) => {
   const [collapseSidebar, setSidebar] = useState(false);
   const [mouseEnter, setMouseEnter] = useState(false);
+  const role = useAuthContext();
 
   const toggleCollapse = () => {
     setSidebar(!collapseSidebar);
@@ -39,13 +41,17 @@ const Sidebar = ({ fixed, theme, className, sidebarToggle, mobileView, ...props 
             icon="menu"
           />
         </div>
-        <div className="nk-sidebar-brand">
-        </div>
+        <div className="nk-sidebar-brand"></div>
       </div>
       <div className="nk-sidebar-content" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <SimpleBar className="nk-sidebar-menu">
-          <Menu sidebarToggle={sidebarToggle} mobileView={mobileView}/>
-        </SimpleBar>
+        {console.log("ROOOOOOOOOle", role)}
+        {role ? (
+          <SimpleBar className="nk-sidebar-menu">
+            <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} role={role} />
+          </SimpleBar>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -3,16 +3,19 @@ const menu = [
     icon: "dashlite",
     text: "Default Dashboard",
     link: "/",
+    role: ["user", "Admin"],
   },
   {
     icon: "file-docs",
     text: "Professions",
     link: "/professions",
+    role: ["Admin"],
   },
   {
     icon: "growth",
     text: "Skills",
     link: "/skills",
+    role: ["Admin"],
   },
   // {
   //   icon: "coins",

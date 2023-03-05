@@ -48,20 +48,9 @@ import {
 } from "../../../../utils/Api";
 import ProfessionInfo from "./general-profession-info";
 import ProfessionSkills from "./profession-skills";
+import AddExistedSkill from "./add-existed-skill";
 
 export const ProjectListPage = () => {
-  useEffect(() => {
-    listAllProfessionSkills();
-    getProfessionSkillsData();
-    getAllSkills();
-  }, []);
-
-  // useEffect(() => {
-  //   if (skills && allSkills) {
-  //     excludeAddedSkills();
-  //   }
-  // }, [skills, allSkills]);
-
   const [sm, updateSm] = useState(false);
   const [modal, setModal] = useState({
     edit: false,
@@ -70,6 +59,7 @@ export const ProjectListPage = () => {
   const [editId, setEditedId] = useState();
   const [data, setData] = useState([]);
   const [skills, setSkills] = useState([]);
+
   const [allSkills, setAllSKills] = useState([]);
   const [availableSkills, setAvailableSkills] = useState([]);
   const [formData, setFormData] = useState({
@@ -90,6 +80,7 @@ export const ProjectListPage = () => {
   const [activeTab, setActiveTab] = useState({
     general: true,
     professions: false,
+    existedSkill: false,
     source: false,
     news: false,
     statistic: false,
@@ -99,6 +90,18 @@ export const ProjectListPage = () => {
   const [addNoteText, setAddNoteText] = useState("");
   const [user, setUser] = useState([1, 2, 3]);
   const { id } = useParams();
+
+  useEffect(() => {
+    listAllProfessionSkills();
+    getProfessionSkillsData();
+    getAllSkills();
+  }, []);
+
+  useEffect(() => {
+    if (skills && allSkills) {
+      excludeAddedSkills();
+    }
+  }, [skills, allSkills]);
 
   // OnChange function to get the input data
   const onInputChange = (e) => {
@@ -136,7 +139,7 @@ export const ProjectListPage = () => {
         const array = res.data().skills;
         if (array.length > 0) {
           getProfessionSkillsData(res.data().skills);
-          setSkills(res.data().skills);
+          // setListOfSkillsId(res.data().skills);
         }
       })
       .catch((err) => console.log(err));
@@ -181,8 +184,15 @@ export const ProjectListPage = () => {
       .catch((err) => console.log(err));
   };
   const excludeAddedSkills = () => {
-    const newArray = allSkills.filter((el) => !skills.includes(el));
-    setAvailableSkills(newArray);
+    console.log("arrayOfAvailab", skills);
+    const arrayOfAvailableSkills = allSkills.filter((skill) => {
+      return !skills.find((userSkill) => {
+        console.log(userSkill);
+        console.log(skill);
+        return userSkill.id === skill.id;
+      });
+    });
+    setAvailableSkills(arrayOfAvailableSkills);
   };
 
   // submit function to add a new item
@@ -337,8 +347,6 @@ export const ProjectListPage = () => {
 
   return (
     <React.Fragment>
-      {console.log("skills", skills)}
-      {console.log("Allskills", allSkills)}
       <React.Fragment>
         <Head title="User Details - Regular"></Head>
         {professionDetils && (
@@ -349,16 +357,6 @@ export const ProjectListPage = () => {
                   <BlockTitle tag="h3" page>
                     Profession / <strong className="text-primary small">{professionDetils.name}</strong>
                   </BlockTitle>
-                  <BlockDes className="text-soft">
-                    <ul className="list-inline">
-                      <li>
-                        User ID: <span className="text-base">UD003054</span>
-                      </li>
-                      <li>
-                        Last Login: <span className="text-base">Uer 01:02 PM</span>
-                      </li>
-                    </ul>
-                  </BlockDes>
                 </BlockHeadContent>
                 <BlockHeadContent>
                   <Button
@@ -399,6 +397,7 @@ export const ProjectListPage = () => {
                               general: true,
                               professions: false,
                               source: false,
+                              existedSkill: false,
                               news: false,
                               statistic: false,
                             });
@@ -418,6 +417,7 @@ export const ProjectListPage = () => {
                               general: false,
                               professions: true,
                               source: false,
+                              existedSkill: false,
                               news: false,
                               statistic: false,
                             });
@@ -436,14 +436,15 @@ export const ProjectListPage = () => {
                             setActiveTab({
                               general: false,
                               professions: false,
-                              source: true,
+                              existedSkill: true,
+                              source: false,
                               news: false,
                               statistic: false,
                             });
                           }}
                         >
                           <Icon name="file-text"></Icon>
-                          <span>Source of Knowledge</span>
+                          <span>Add Skill</span>
                         </a>
                       </li>
                       <li className="nav-item">
@@ -457,6 +458,7 @@ export const ProjectListPage = () => {
                               professions: false,
                               source: false,
                               news: true,
+                              existedSkill: false,
                               statistic: false,
                             });
                           }}
@@ -477,6 +479,7 @@ export const ProjectListPage = () => {
                               source: false,
                               news: false,
                               statistic: true,
+                              existedSkill: false,
                             });
                           }}
                         >
@@ -493,6 +496,16 @@ export const ProjectListPage = () => {
                     {professionDetils && activeTab.general ? <ProfessionInfo professionData={professionDetils} /> : ""}
                     {skills && activeTab.professions ? (
                       <ProfessionSkills skillTitle={professionDetils.title} skills={skills} />
+                    ) : (
+                      ""
+                    )}
+                    {activeTab.existedSkill ? (
+                      <AddExistedSkill
+                        skillTitle={professionDetils.title}
+                        skills={availableSkills}
+                        professionId={id}
+                        getAllSkills={() => getAllSkills()}
+                      />
                     ) : (
                       ""
                     )}
@@ -953,126 +966,6 @@ export const ProjectListPage = () => {
             </div>
           </DataTable>
         </Block> */}
-
-        <BlockTitle page> Available skills</BlockTitle>
-        <Block>
-          <DataTable className="card-stretch">
-            <DataTableBody>
-              <DataTableHead className="nk-tb-item nk-tb-head">
-                <DataTableRow className="nk-tb-col-check">
-                  <div className="custom-control custom-control-sm custom-checkbox notext">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input form-control"
-                      id="pid-all"
-                      onChange={(e) => selectorCheck(e)}
-                    />
-                    <label className="custom-control-label" htmlFor="pid-all"></label>
-                  </div>
-                </DataTableRow>
-                <DataTableRow>
-                  <span className="sub-text">Title</span>
-                </DataTableRow>
-                <DataTableRow size="sub-text">
-                  <span className="sub-text">Complexity</span>
-                </DataTableRow>
-                <DataTableRow size="lg">
-                  <span className="sub-text">Hours to learn</span>
-                </DataTableRow>
-                <DataTableRow className="nk-tb-col-tools text-right">
-                  <UncontrolledDropdown>
-                    <DropdownToggle tag="a" className="btn btn-xs btn-trigger btn-icon dropdown-toggle mr-n1">
-                      <Icon name="more-h"></Icon>
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <ul className="link-list-opt no-bdr">
-                        <li onClick={() => selectorCompleteProject()}>
-                          <DropdownItem
-                            tag="a"
-                            href="#markasdone"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            <Icon name="check-round-cut"></Icon>
-                            <span>Mark As Done</span>
-                          </DropdownItem>
-                        </li>
-                        <li onClick={() => selectorDeleteProject()}>
-                          <DropdownItem
-                            tag="a"
-                            href="#remove"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            <Icon name="trash"></Icon>
-                            <span>Remove Skill</span>
-                          </DropdownItem>
-                        </li>
-                      </ul>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </DataTableRow>
-              </DataTableHead>
-              {getFilteredArray().length > 0
-                ? getFilteredArray().map((item) => {
-                    return (
-                      <DataTableItem key={item.id}>
-                        <DataTableRow className="nk-tb-col-check">
-                          <div className="custom-control custom-control-sm custom-checkbox notext">
-                            <input
-                              type="checkbox"
-                              className="custom-control-input form-control"
-                              // defaultChecked={item.checked}
-                              id={item.id + "pid-all"}
-                              key={Math.random()}
-                              onChange={(e) => onSelectChange(e, item.id)}
-                            />
-                            <label className="custom-control-label" htmlFor={item.id + "pid-all"}></label>
-                          </div>
-                        </DataTableRow>
-                        <DataTableRow>
-                          <a
-                            href="#title"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                            className="project-title"
-                          >
-                            <div className="project-info">
-                              <Link to={`/skills/${item.id}`}>{item.title}</Link>
-                            </div>
-                          </a>
-                        </DataTableRow>
-                        <DataTableRow size="lg">
-                          <span>{item.complexity}</span>
-                        </DataTableRow>
-                        <DataTableRow size="lg">
-                          <span>{item.hours}</span>
-                        </DataTableRow>
-                        <DataTableRow size="lg"></DataTableRow>
-                      </DataTableItem>
-                    );
-                  })
-                : null}
-            </DataTableBody>
-            <div className="card-inner">
-              {getFilteredArray().length > 0 ? (
-                <PaginationComponent
-                  itemPerPage={itemPerPage}
-                  totalItems={data.length}
-                  paginate={paginate}
-                  currentPage={currentPage}
-                />
-              ) : (
-                <div className="text-center">
-                  <span className="text-silent">No skills found</span>
-                </div>
-              )}
-            </div>
-          </DataTable>
-        </Block>
 
         <Modal isOpen={modal.add} toggle={() => setModal({ add: false })} className="modal-dialog-centered" size="lg">
           <ModalBody>

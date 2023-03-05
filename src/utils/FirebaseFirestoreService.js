@@ -73,6 +73,10 @@ const updateDocument = async (collection, professionId, updateBody) => {
 };
 
 const addValueToArray = async (collection, professionId, array, value) => {
+  console.log(collection)
+  console.log(professionId)
+  console.log(array)
+  console.log(value)
   const collectionToUpdate = doc(firestore, collection, professionId);
   await updateDoc(collectionToUpdate, {
     [array]: arrayUnion(value),

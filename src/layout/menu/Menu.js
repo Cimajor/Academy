@@ -198,10 +198,11 @@ const MenuSub = ({ icon, link, text, sub, sidebarToggle, mobileView, ...props })
   );
 };
 
-const Menu = ({ sidebarToggle, mobileView }) => {
+const Menu = ({ sidebarToggle, mobileView, role }) => {
   return (
     <ul className="nk-menu">
       {menu.map((item) =>
+      item.role.includes(role.roles[0]) ?
         item.heading ? (
           <MenuHeading heading={item.heading} key={item.heading} />
         ) : (
@@ -214,7 +215,7 @@ const Menu = ({ sidebarToggle, mobileView }) => {
             sidebarToggle={sidebarToggle}
             mobileView={mobileView}
           />
-        )
+        ) : ""
       )}
     </ul>
   );

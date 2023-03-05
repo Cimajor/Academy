@@ -393,7 +393,7 @@ const SkillProfessions = ({ skillTitle, skills }) => {
               <Icon name="cross-sm"></Icon>
             </a>
             <div className="p-2">
-              <h5 className="title">Add Profession</h5>
+              <h5 className="title">Add Skill</h5>
               <div className="mt-4">
                 <Form className="row gy-4" noValidate>
                   <Col md="6">
@@ -470,7 +470,7 @@ const SkillProfessions = ({ skillTitle, skills }) => {
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                       <li>
                         <Button color="primary" size="md" type="submit">
-                          Add Profession
+                          Add Skill
                         </Button>
                       </li>
                       <li>
