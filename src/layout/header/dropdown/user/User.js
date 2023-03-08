@@ -4,8 +4,8 @@ import { DropdownToggle, DropdownMenu, Dropdown } from "reactstrap";
 import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import { useAuth } from "../../../../context/AuthContext";
-import { _GetUserRole } from "../../../../utils/Api";
-import { useAuthContext, setUserRole, useUserDispatch } from "../../../../context/AuthContextProvider";
+import { _GetUser } from "../../../../utils/Api";
+import { useAuthContext, setUserRole, useUserDispatch, setUserId } from "../../../../context/AuthContextProvider";
 
 const User = () => {
   const [open, setOpen] = useState(false);
@@ -21,14 +21,14 @@ const User = () => {
   }, []);
 
   const getUserData = () => {
-    _GetUserRole(currentUser.uid)
+    _GetUser(currentUser.uid)
       .then((res) => {
         const listOfRoles = [];
         res.forEach((doc) => {
           listOfRoles.push(doc.data().data.userData.role);
         });
-        console.log(listOfRoles);
         setUserRole(userDispatch, listOfRoles);
+        setUserId(userDispatch, res.docs[0].id);
         // setUserRoles(listOfRoles);
       })
       .catch((err) => console.log(err));

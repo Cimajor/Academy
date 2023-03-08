@@ -45,10 +45,13 @@ import {
   _GetAllSkills,
   _getProfessionById,
   _getProfessionSkillsData,
+  _ApplyForProfession,
 } from "../../../../utils/Api";
 import ProfessionInfo from "./general-profession-info";
 import ProfessionSkills from "./profession-skills";
 import AddExistedSkill from "./add-existed-skill";
+import { useAuth } from "../../../../context/AuthContext";
+import { useAuthContext } from "../../../../context/AuthContextProvider";
 
 export const ProjectListPage = () => {
   const [sm, updateSm] = useState(false);
@@ -88,8 +91,9 @@ export const ProjectListPage = () => {
   const [sideBar, setSidebar] = useState(false);
   const [addNoteModal, setAddNoteModal] = useState(false);
   const [addNoteText, setAddNoteText] = useState("");
-  const [user, setUser] = useState([1, 2, 3]);
   const { id } = useParams();
+  const { currentUser } = useAuth();
+  const { roles, uid } = useAuthContext();
 
   useEffect(() => {
     listAllProfessionSkills();
@@ -110,6 +114,14 @@ export const ProjectListPage = () => {
 
   const toggle = () => {
     setSidebar(!sideBar);
+  };
+
+  const applyForProfession = () => {
+    const professionId = id;
+    console.log(professionId, uid); 
+    _ApplyForProfession(uid, professionId)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   // function to reset the form
@@ -187,8 +199,6 @@ export const ProjectListPage = () => {
     console.log("arrayOfAvailab", skills);
     const arrayOfAvailableSkills = allSkills.filter((skill) => {
       return !skills.find((userSkill) => {
-        console.log(userSkill);
-        console.log(skill);
         return userSkill.id === skill.id;
       });
     });
@@ -558,9 +568,12 @@ export const ProjectListPage = () => {
                     <div className="card-inner">
                       <div className="user-card user-card-s2 mt-5 mt-xxl-0">
                         <div className="user-info">
-                          <div className="badge badge-outline-light badge-pill ucap">Role</div>
-                          <h5>{user.name}</h5>
-                          <span className="sub-text">Email</span>
+                          <Button color="primary" onClick={applyForProfession}>
+                            <Icon name="plus"></Icon>
+                            <span>Apply</span>
+                          </Button>
+
+                          <span className="sub-text">{professionDetils.name}</span>
                         </div>
                       </div>
                     </div>

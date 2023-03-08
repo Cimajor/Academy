@@ -1,7 +1,6 @@
 import axios from "axios";
 import FirebaseFirestoreService from "./FirebaseFirestoreService";
 
-
 const userID = "24fSmp7Jmc7nWnniwtQB3fb3JORSDGZ24X8uXORb";
 const userSecret =
   "3truDyYzYvdWqXh29snghiIIARJadCurlxLBk3n96QcuS19IcgTNdrlM2Ze75oHIClkCNrVak6nqnc0kXUSygnZ4Q6ZcZ5KwEstP1LiBC9n55nzPW2tCzwGYQCxoW3E8";
@@ -69,7 +68,7 @@ export const _getProfessionSkillsData = async (arrayOfIds) => {
 //Skills
 
 export const _getSkillProfessionsData = async (skillId) => {
-  return await FirebaseFirestoreService.readProfessionsRelatedToSkill("professions", skillId);
+  return await FirebaseFirestoreService.readDocumentsByArray("professions","skills",skillId);
 };
 
 export const _CreateSkill = async (body) => {
@@ -85,10 +84,20 @@ export const _GetSkillById = async (skillId) => {
   return FirebaseFirestoreService.readDocument("skills", skillId);
 };
 
+//User
 export const _CreateUser = async (userId, body) => {
-  return await FirebaseFirestoreService.createDocument("users", {uid: userId, data: body});
-}
+  return await FirebaseFirestoreService.createDocument("users", { uid: userId, data: body });
+};
 
-export const _GetUserRole = async (userId) => {
+export const _GetUser = async (userId) => {
   return await FirebaseFirestoreService.readQueryWhere("users", "uid", userId);
-}
+};
+
+export const _ApplyForProfession = async (userId, professionId) => {
+  return FirebaseFirestoreService.addValueToArray("users", userId, "appliedProfessions", professionId);
+};
+
+export const _getUserAppliedSkillsData = async (listOfSkills) => {
+  return await FirebaseFirestoreService.readDocumentsbyQuery("professions", listOfSkills);
+};
+

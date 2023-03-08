@@ -9,13 +9,13 @@ const menu = [
     icon: "file-docs",
     text: "Professions",
     link: "/professions",
-    role: ["Admin"],
+    role: ["Admin", "user"],
   },
   {
     icon: "growth",
     text: "Skills",
     link: "/skills",
-    role: ["Admin"],
+    role: ["Admin", "user"],
   },
   // {
   //   icon: "coins",

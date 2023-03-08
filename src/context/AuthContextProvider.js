@@ -15,6 +15,13 @@ function userReducer(state, action) {
         ...state,
         roles: action.roles,
       };
+
+    case "SET_USER_ID":
+      console.log("type", action);
+      return {
+        ...state,
+        uid: action.uid,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -24,6 +31,7 @@ function userReducer(state, action) {
 const AuthContextProvider = ({ children }) => {
   let initialUserState = {
     roles: [],
+    uid: "",
   };
   const [state, dispatch] = React.useReducer(userReducer, initialUserState);
 
@@ -59,4 +67,14 @@ async function setUserRole(dispatch, roles) {
   }
 }
 
-export { useAuthContext, AuthContextProvider, useUserDispatch, setUserRole };
+async function setUserId(dispatch, uid) {
+  try {
+    dispatch({ type: "SET_USER_ID", uid: uid });
+    // dispatch({ type: 'LOGIN_SUCCESS' })
+  } catch (err) {
+    console.log("Can't set role");
+    console.log(err);
+  }
+}
+
+export { useAuthContext, AuthContextProvider, useUserDispatch, setUserRole, setUserId };

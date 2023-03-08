@@ -3,24 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { RedirectAs404 } from "./utils/Utils";
 import PrivateRoute from "./route/PrivateRoute";
 import PublicRoute from "./route/PublicRoute";
-import ProjectCardPage from "./pages/pre-built/projects/ProjectCard";
-import ProjectListPage from "./pages/pre-built/projects/ProjectList";
-
-import UserContactCardPage from "./pages/pre-built/user-manage/UserContactCard";
-import UserDetailsPage from "./pages/pre-built/user-manage/UserDetailsRegular";
-import UserListCompact from "./pages/pre-built/user-manage/UserListCompact";
-import UserProfileLayout from "./pages/pre-built/user-manage/UserProfileLayout";
-import KycListRegular from "./pages/pre-built/kyc-list-regular/KycListRegular";
-import KycDetailsRegular from "./pages/pre-built/kyc-list-regular/kycDetailsRegular";
-import TransListBasic from "./pages/pre-built/trans-list/TransListBasic";
-import TransListCrypto from "./pages/pre-built/trans-list/TransListCrypto";
-import ProductCard from "./pages/pre-built/products/ProductCard";
-import ProductList from "./pages/pre-built/products/ProductList";
-import ProductDetails from "./pages/pre-built/products/ProductDetails";
-import InvoiceList from "./pages/pre-built/invoice/InvoiceList";
-import InvoiceDetails from "./pages/pre-built/invoice/InvoiceDetails";
-import PricingTable from "./pages/pre-built/pricing-table/PricingTable";
-import Gallery from "./pages/pre-built/gallery/GalleryCard";
 
 import Layout from "./layout/Index";
 
@@ -35,9 +17,6 @@ import Terms from "./pages/others/Terms";
 
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import Success from "./pages/auth/Success";
-import InvoicePrint from "./pages/pre-built/invoice/InvoicePrint";
 // import FirebaaseAuthService from "./utils/FireBaseAuth";
 // import { getAuth } from "firebase/auth";
 // import { AuthContextProvider, useAuthState } from "./utils/firebase";
@@ -49,6 +28,7 @@ import ProfessionDetails from "./pages/custom-pages/professions/profession-detai
 import SkillDetailsPage from "./pages/custom-pages/professions/skills-details/skills-details";
 import Skills from "./pages/custom-pages/skills/skills";
 import MainFrontend from "./pages/frontend/MainFrontend";
+import UserDashboard from "./pages/custom-pages/dashboard/dahboard-main";
 
 const App = () => {
   return (
@@ -64,7 +44,7 @@ const App = () => {
                   element={
                     <PrivateRoute>
                       {" "}
-                      <NewHomepage />
+                      <UserDashboard />
                     </PrivateRoute>
                   }
                 ></Route>
@@ -132,6 +112,15 @@ const App = () => {
                 element={
                   <PublicRoute>
                     <Register />
+                  </PublicRoute>
+                }
+              ></Route>
+              <Route
+                exact
+                path={`${process.env.PUBLIC_URL}/*`}
+                element={
+                  <PublicRoute>
+                    <Error404Classic />
                   </PublicRoute>
                 }
               ></Route>

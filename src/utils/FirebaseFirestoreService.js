@@ -19,15 +19,6 @@ const createDocument = async (collectionToCreate, document) => {
   return docRef;
 };
 
-const readCollection = async (collectionName) => {
-  try {
-    const querySnapshot = await getDocs(collection(firestore, collectionName));
-    return querySnapshot;
-  } catch (e) {
-    console.error(e);
-  }
-};
-
 const readDocument = async (collectionName, documentId) => {
   try {
     const documentToGet = doc(firestore, collectionName, documentId);
@@ -36,6 +27,12 @@ const readDocument = async (collectionName, documentId) => {
     console.error(e);
   }
 };
+
+const deleteDocument = (collection, id) => {
+  return firestore.collection(collection).doc(id).delete();
+};
+
+
 
 const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
   const q = query(collection(firestore, collectionId), where(documentId(), "in", arrayOfWalues));
@@ -47,8 +44,18 @@ const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
   }
 };
 
-const readProfessionsRelatedToSkill = async (collectionId, skillId) => {
-  const q = query(collection(firestore, collectionId), where("skills", "array-contains", skillId));
+
+const readCollection = async (collectionName) => {
+  try {
+    const querySnapshot = await getDocs(collection(firestore, collectionName));
+    return querySnapshot;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const readDocumentsByArray = async (collectionId, fieldToCheck, skillId) => {
+  const q = query(collection(firestore, collectionId), where(fieldToCheck, "array-contains", skillId));
   try {
     const querySnapshot = await getDocs(q);
     return querySnapshot;
@@ -72,20 +79,13 @@ const updateDocument = async (collection, professionId, updateBody) => {
   await updateDoc(collectionToUpdate, updateBody);
 };
 
-const addValueToArray = async (collection, professionId, array, value) => {
-  console.log(collection)
-  console.log(professionId)
-  console.log(array)
-  console.log(value)
-  const collectionToUpdate = doc(firestore, collection, professionId);
+const addValueToArray = async (collection, documentId, array, value) => {
+  const collectionToUpdate = doc(firestore, collection, documentId);
   await updateDoc(collectionToUpdate, {
     [array]: arrayUnion(value),
   });
 };
 
-const deleteDocument = (collection, id) => {
-  return firestore.collection(collection).doc(id).delete();
-};
 
 const FirebaseFirestoreService = {
   createDocument,
@@ -95,7 +95,7 @@ const FirebaseFirestoreService = {
   addValueToArray,
   readDocument,
   readDocumentsbyQuery,
-  readProfessionsRelatedToSkill,
+  readDocumentsByArray,
   readQueryWhere,
 };
 
