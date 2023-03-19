@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
-import {_GetListOfSources} from '../../../utils/Api'
+import { _GetListOfSources } from "../../../utils/Api";
 import Head from "../../../layout/head/Head";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { Spinner } from "reactstrap";
 import { UncontrolledDropdown, DropdownMenu, DropdownToggle, Card, Badge, DropdownItem } from "reactstrap";
 import {
@@ -18,8 +18,7 @@ import {
 } from "../../../components/Component";
 import { Link } from "react-router-dom";
 import { sourcesData } from "./Sources";
-import SkillsMap from "../Components/SkillsMap"
-
+import SkillsMap from "../Components/SkillsMap";
 
 const ListOfSources = () => {
   const [data, setData] = useState(sourcesData);
@@ -28,9 +27,9 @@ const ListOfSources = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemPerPage] = useState(10);
   const [sort, setSortState] = useState("asc");
-  const [isLoading, setIsLoading] = useState(false)
-  const [listOfSource, setListOfSource] = useState([])
-  const { skill } = useParams()
+  const [isLoading, setIsLoading] = useState(false);
+  const [listOfSource, setListOfSource] = useState([]);
+  const { skill } = useParams();
 
   // Sorting data
   const sortFunc = () => {
@@ -57,17 +56,20 @@ const ListOfSources = () => {
   }, [onSearchText]);
 
   useEffect(() => {
-    getListOfSkillSources(skill)
+    getListOfSkillSources(skill);
   }, []);
 
   const getListOfSkillSources = (skill) => {
-    setIsLoading(true)
-    
+    setIsLoading(true);
+
     _GetListOfSources(skill)
-    .then(response => {setListOfSource(response.data.results); console.log(response.data.results)})
-    .catch(error => console.log(error))
-    .then(() => setIsLoading(false))
-  }
+      .then((response) => {
+        setListOfSource(response.data.results);
+        console.log(response.data.results);
+      })
+      .catch((error) => console.log(error))
+      .then(() => setIsLoading(false));
+  };
 
   // onChange function for searching name
   const onFilterChange = (e) => {
@@ -224,7 +226,7 @@ const ListOfSources = () => {
                 <table className="table table-orders">
                   <thead className="tb-odr-head">
                     <tr className="tb-odr-item">
-                    <th className="tb-odr-info">
+                      <th className="tb-odr-info">
                         <span className="tb-odr-id">Source</span>
                       </th>
                       <th className="tb-odr-amount">
@@ -234,53 +236,54 @@ const ListOfSources = () => {
                       <th className="tb-odr-action">Instructor</th>
                     </tr>
                   </thead>
-                  {isLoading ? <Spinner size="bg" color="light" /> : 
-                  <tbody className="tb-odr-body">
-                    {listOfSource.length > 0
-                      ? listOfSource.map((item) => {
-                          return (
-                            <tr className="tb-odr-item" key={item.title}>
-                              <td className="tb-odr-info">
-                                <span className="tb-odr-id">
-                                  <Link to={{ pathname: `https://www.udemy.com${item.url}`}} target="_blank">
+                  {isLoading ? (
+                    <Spinner size="bg" color="light" />
+                  ) : (
+                    <tbody className="tb-odr-body">
+                      {listOfSource.length > 0
+                        ? listOfSource.map((item) => {
+                            return (
+                              <tr className="tb-odr-item" key={item.title}>
+                                <td className="tb-odr-info">
+                                  <span className="tb-odr-id">
+                                    {/* <Link to={{ pathname: `https://www.udemy.com${item.url}`}} target="_blank">
                                     {item.title}
+                                  </Link> */}
+                                    <a href={`https://www.udemy.com${item.url}`}>{item.title}</a>
+                                  </span>
+                                  <span className="tb-odr-date">{item._class}</span>
+                                </td>
+                                <td className="tb-odr-amount">
+                                  <span className="tb-odr-total">
+                                    <span className="amount">
+                                      {item.price_detail.amount} {item.price_detail.currency_symbol}
+                                    </span>
+                                  </span>
+                                  <span className="tb-odr-status">
+                                    <Badge
+                                      color={item.status === "Recomended" ? "success" : "danger"}
+                                      className="badge-dot"
+                                    >
+                                      {item.status}
+                                    </Badge>
+                                  </span>
+                                </td>
+                                <td className="tb-odr-action">
+                                  <div className="tb-odr-btns d-none d-sm-inline">
+                                    <span>{item.visible_instructors[0].display_name}</span>
+                                  </div>
+                                  <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
+                                    <Button className="btn-pd-auto d-sm-none">
+                                      <Icon name="chevron-right"></Icon>
+                                    </Button>
                                   </Link>
-                                </span>
-                                <span className="tb-odr-date">{item._class}</span>
-                              </td>
-                              <td className="tb-odr-amount">
-                                <span className="tb-odr-total">
-                                  <span className="amount">{item.price_detail.amount} {item.price_detail.currency_symbol}</span>
-                                </span>
-                                <span className="tb-odr-status">
-                                  <Badge
-                                    color={
-                                      item.status === "Recomended" ? "success" : "danger"
-                                    }
-                                    className="badge-dot"
-                                  >
-                                    {item.status}
-                                  </Badge>
-                                </span>
-                              </td>
-                              <td className="tb-odr-action">
-                                <div className="tb-odr-btns d-none d-sm-inline">
-                                <span>
-                                      {item.visible_instructors[0].display_name}
-                                      </span>
-                                </div>
-                                <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
-                                  <Button className="btn-pd-auto d-sm-none">
-                                    <Icon name="chevron-right"></Icon>
-                                  </Button>
-                                </Link>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      : null}
-                  </tbody>
-                  }
+                                </td>
+                              </tr>
+                            );
+                          })
+                        : null}
+                    </tbody>
+                  )}
                 </table>
               </div>
               <div className="card-inner">

@@ -1,21 +1,21 @@
 const menu = [
   {
-    icon: "dashlite",
-    text: "Default Dashboard",
+    icon: "scan-fill",
+    text: "Dashboard",
     link: "/",
-    role: ["user", "Admin"],
+    role: ["User", "Admin"],
   },
   {
     icon: "file-docs",
     text: "Professions",
     link: "/professions",
-    role: ["Admin", "user"],
+    role: ["Admin", "User"],
   },
   {
     icon: "growth",
     text: "Skills",
     link: "/skills",
-    role: ["Admin", "user"],
+    role: ["Admin"],
   },
   // {
   //   icon: "coins",

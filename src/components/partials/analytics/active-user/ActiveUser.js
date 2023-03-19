@@ -7,8 +7,8 @@ const ActiveUser = () => {
     <React.Fragment>
       <div className="card-title-group align-start pb-3 g-2">
         <div className="card-title card-title-sm">
-          <h6 className="title">Active Users</h6>
-          <p>How do your users visited in the time.</p>
+          <h6 className="title">Open vacancies</h6>
+          <p>How many new vacancies were open per month</p>
         </div>
         <div className="card-tools">
           <TooltipComponent

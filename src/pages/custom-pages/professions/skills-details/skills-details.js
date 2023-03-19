@@ -20,9 +20,11 @@ import {
 } from "../../../../components/Component";
 import { useHistory } from "react-router";
 import { currentTime, findUpper, monthNames, todaysDate } from "../../../../utils/Utils";
-import { _GetSkillById } from "../../../../utils/Api";
+import { _GetSkillById, _GetListOfReditNews } from "../../../../utils/Api";
 import GeneralSkillInfo from "./general-info";
 import SkillProfessions from "./skill-profession";
+import SourceOfKnowledge from "./source-of-knowledge";
+import SkillNews from "./skill-news";
 
 const SkillDetails = ({ match }) => {
   const { id } = useParams();
@@ -53,6 +55,7 @@ const SkillDetails = ({ match }) => {
   const toggle = () => {
     setSidebar(!sideBar);
   };
+
 
   const getSkillData = () => {
     _GetSkillById(id)
@@ -227,6 +230,12 @@ const SkillDetails = ({ match }) => {
                   </ul>
                   {skillDetails && activeTab.general ? <GeneralSkillInfo skillInfoData={skillDetails} /> : ""}
                   {skillDetails && activeTab.professions ? <SkillProfessions skillTitle={skillDetails.title} /> : ""}
+                  {skillDetails && activeTab.source ? (
+                    <SourceOfKnowledge skillTitle={skillDetails.title} skillId={id} />
+                  ) : (
+                    ""
+                  )}
+                  {skillDetails && activeTab.news ? <SkillNews skillTitle={skillDetails.title} /> : ""}
                 </div>
 
                 <Modal

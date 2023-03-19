@@ -78,7 +78,7 @@ const FrontEndSkills = () => {
               setActiveIndex(1)
             }}
           >
-            Advantage Level
+            Advance Level
           </NavLink>
         </NavItem>
       </Nav>

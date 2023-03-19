@@ -37,12 +37,24 @@ export const _GetListOfSources = (skillName) => {
   return response;
 };
 
+export const _GetListOfReditNews = async (searchTerm, searchLimit) => {
+  // const params = { page: 1, page_size: 15, search: skillName };
+
+  var response = axios.get(`http://www.reddit.com/search.json?q=${searchTerm}&sort=relevant&limit=${searchLimit}`, {
+    auth: {
+      username: userID,
+      password: userSecret,
+    },
+  });
+
+  response.then((res) => console.log(res)).catch();
+  return response;
+};
 // export const createDocument = (collection, document) => {
 //   return db.collection(collection).document(document);
 // };
 
-//Professions
-
+//Professions   ============================
 export const _CreateProfession = (body) => {
   FirebaseFirestoreService.createDocument("professions", body);
   // createDocument("companies", body);
@@ -65,10 +77,9 @@ export const _getProfessionSkillsData = async (arrayOfIds) => {
   return await FirebaseFirestoreService.readDocumentsbyQuery("skills", arrayOfIds);
 };
 
-//Skills
-
+//Skills   ============================
 export const _getSkillProfessionsData = async (skillId) => {
-  return await FirebaseFirestoreService.readDocumentsByArray("professions","skills",skillId);
+  return await FirebaseFirestoreService.readDocumentsByArray("professions", "skills", skillId);
 };
 
 export const _CreateSkill = async (body) => {
@@ -84,7 +95,7 @@ export const _GetSkillById = async (skillId) => {
   return FirebaseFirestoreService.readDocument("skills", skillId);
 };
 
-//User
+//User   ============================
 export const _CreateUser = async (userId, body) => {
   return await FirebaseFirestoreService.createDocument("users", { uid: userId, data: body });
 };
@@ -101,3 +112,11 @@ export const _getUserAppliedSkillsData = async (listOfSkills) => {
   return await FirebaseFirestoreService.readDocumentsbyQuery("professions", listOfSkills);
 };
 
+//Source   ============================
+export const _CreateSource = async (body) => {
+  return await FirebaseFirestoreService.createDocument("source", body);
+};
+
+export const _getAllSkillSources = async (skillId) => {
+  return await FirebaseFirestoreService.readDocumentsByArray("source", "tags", skillId);
+};

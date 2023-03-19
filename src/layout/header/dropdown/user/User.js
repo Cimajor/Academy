@@ -13,10 +13,12 @@ const User = () => {
   const { logout, currentUser } = useAuth();
   const userDispatch = useUserDispatch();
   const { roles } = useAuthContext();
+  const [userFirstName, setUserFirestName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   // const [userRoles, setUserRoles] = useState(roles);
 
   useEffect(() => {
-    console.log("fffff", roles);
     getUserData();
   }, []);
 
@@ -26,6 +28,9 @@ const User = () => {
         const listOfRoles = [];
         res.forEach((doc) => {
           listOfRoles.push(doc.data().data.userData.role);
+          setUserFirestName(doc.data().data.userData.firstName);
+          setUserLastName(doc.data().data.userData.lastName);
+          setUserEmail(doc.data().data.userData.email);
         });
         setUserRole(userDispatch, listOfRoles);
         setUserId(userDispatch, res.docs[0].id);
@@ -52,7 +57,9 @@ const User = () => {
           <UserAvatar icon="user-alt" className="sm" />
           <div className="user-info d-none d-md-block">
             <div className="user-status">{roles ? roles.map((item) => item) : "nima"}</div>
-            <div className="user-name dropdown-indicator">Illia Milevskiy</div>
+            <div className="user-name dropdown-indicator">
+              {userFirstName} {userLastName}
+            </div>
           </div>
         </div>
       </DropdownToggle>
@@ -64,8 +71,10 @@ const User = () => {
               <span>AB</span>
             </div>
             <div className="user-info">
-              <span className="lead-text">Illia Milevskiy</span>
-              <span className="sub-text">info@softnio.com</span>
+              <span className="lead-text">
+                {userFirstName} {userLastName}
+              </span>
+              <span className="sub-text">{userEmail}</span>
             </div>
           </div>
         </div>

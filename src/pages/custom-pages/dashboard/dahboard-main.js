@@ -5,6 +5,7 @@ import { projectData } from "../../pre-built/projects/ProjectData";
 import { ProjectCard } from "../../../components/partials/project-card/ProjectCard";
 import { findUpper, setDeadline, setDeadlineDays, calcPercentage } from "../../../utils/Utils";
 import { Link } from "react-router-dom";
+import { Loader } from "semantic-ui-react";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown, DropdownItem, Progress } from "reactstrap";
 import {
   Block,
@@ -47,6 +48,7 @@ const UserDashboard = () => {
     edit: false,
   });
   const { currentUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getUserData();
@@ -75,20 +77,26 @@ const UserDashboard = () => {
   };
 
   const getUserData = () => {
+    setIsLoading(true);
     _GetUser(currentUser.uid)
       .then((res) => {
         setUserData(res.docs[0].data().data);
         console.log(res.docs[0].data().appliedProfessions);
         setUserProfessions(res.docs[0].data().appliedProfessions);
+        console.log(res.docs[0].data().appliedProfessions);
         _getUserAppliedSkillsData(res.docs[0].data().appliedProfessions)
           .then((res) =>
             res.docs.map((doc) =>
               setAppliedProfessionsData((appliedProfessionsData) => [...appliedProfessionsData, doc.data()])
             )
           )
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err))
+          .finally(() => setIsLoading(false));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   };
 
   // function to change the complete a project property
@@ -115,99 +123,111 @@ const UserDashboard = () => {
   return (
     <React.Fragment>
       <Head title="Homepage"></Head>
-      <Content>
-        <BlockHead size="sm">
-          <BlockBetween>
-            <BlockHeadContent>
-              <BlockTitle page tag="h3">
-                Dashboard
-              </BlockTitle>
-              <BlockDes className="text-soft">
-                <p>Welcome to Schoolless </p>
-              </BlockDes>
-            </BlockHeadContent>
-          </BlockBetween>
-        </BlockHead>
-        <Block>
-          <Row className="g-gs">
-            {appliedProfessionsData.length > 0 ? (
-              <>
-                {appliedProfessionsData.length > 0 &&
-                  appliedProfessionsData.map((item, idx) => {
-                    console.log(item);
-                    var days = setDeadline(94);
-                    return (
-                      <Col sm="6" lg="4" xxl="3" key={item.id}>
-                        <ProjectCard>
-                          <div className="project-head">
-                            <a
-                              href="#title"
-                              onClick={(ev) => {
-                                ev.preventDefault();
-                              }}
-                              className="project-title"
-                            >
-                              <UserAvatar className="sq" theme="purple" text={findUpper(item.name)} />
-                              <div className="project-info">
-                                <Link to={`${item.url}`}>
-                                  <h6 className="title">{item.name}</h6>
-                                </Link>
-                                <span className="sub-text">{item.description}</span>
+      {isLoading ? (
+        <div className="loaderSreen">
+          <div className="page-loading">
+            <Loader active size="large">
+              <p>Loading...</p>
+            </Loader>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Content>
+            <BlockHead size="sm">
+              <BlockBetween>
+                <BlockHeadContent>
+                  <BlockTitle page tag="h3">
+                    Dashboard
+                  </BlockTitle>
+                  <BlockDes className="text-soft">
+                    <p>Welcome to Schoolless </p>
+                  </BlockDes>
+                </BlockHeadContent>
+              </BlockBetween>
+            </BlockHead>
+            <Block>
+              <Row className="g-gs">
+                {appliedProfessionsData.length > 0 ? (
+                  <>
+                    {appliedProfessionsData.length > 0 &&
+                      appliedProfessionsData.map((item, idx) => {
+                        console.log(item);
+                        var days = setDeadline(94);
+                        return (
+                          <Col sm="6" lg="4" xxl="3" key={item.id}>
+                            <ProjectCard>
+                              <div className="project-head">
+                                <a
+                                  href="#title"
+                                  onClick={(ev) => {
+                                    ev.preventDefault();
+                                  }}
+                                  className="project-title"
+                                >
+                                  <UserAvatar className="sq" theme="purple" text={findUpper(item.name)} />
+                                  <div className="project-info">
+                                    <Link to={`/applied-profession/frontend`}>
+                                      <h6 className="title">{item.name}</h6>
+                                    </Link>
+                                    <span className="sub-text">{item.description}</span>
+                                  </div>
+                                </a>
                               </div>
-                            </a>
-                          </div>
-                          <div className="project-details">
-                            {item.description.length > 90
-                              ? item.description.substring(0, 89) + "... "
-                              : item.description}
-                          </div>
-                          <div className="project-progress">
-                            <div className="project-progress-details">
-                              <div className="project-progress-task">
-                                <Icon name="check-round-cut"></Icon>
-                                <span>{item.skills.length} Skills</span>
+                              <div className="project-details">
+                                {item.description.length > 90
+                                  ? item.description.substring(0, 89) + "... "
+                                  : item.description}
                               </div>
-                              <div className="project-progress-percent">
-                                {days === 0 ? 100 : calcPercentage("4", "10")}%
+                              <div className="project-progress">
+                                <div className="project-progress-details">
+                                  <div className="project-progress-task">
+                                    <Icon name="check-round-cut"></Icon>
+                                    <span>{item.skills.length} Skills</span>
+                                  </div>
+                                  <div className="project-progress-percent">
+                                    {days === 0 ? 100 : calcPercentage("8", "6")}%
+                                  </div>
+                                </div>
+                                <Progress
+                                  className="progress-pill progress-md bg-light"
+                                  value={days === 0 ? 100 : calcPercentage("4", "10")}
+                                ></Progress>
                               </div>
-                            </div>
-                            <Progress
-                              className="progress-pill progress-md bg-light"
-                              value={days === 0 ? 100 : calcPercentage("4", "10")}
-                            ></Progress>
-                          </div>
-                          <div className="project-meta">
-                            <span
-                              className={`badge badge-dim badge-${
-                                days > 10
-                                  ? "light"
-                                  : days <= 10 && days >= 2
-                                  ? "light"
-                                  : days === 1
-                                  ? "light"
-                                  : days <= 0 && "success"
-                              }`}
-                            >
-                              <Icon name="clock"></Icon>
-                              <span>{"Aproximetly 46 hours of learning left"}</span>
-                            </span>
-                          </div>
-                        </ProjectCard>
-                      </Col>
-                    );
-                  })}{" "}
-              </>
-            ) : (
-              <div>
-                {" "}
-                <Link to={`${process.env.PUBLIC_URL}/professions`} className="nav-link">
-                  Please visit Professions you want to get
-                </Link>
-              </div>
-            )}
-          </Row>
-        </Block>
-      </Content>
+                              <div className="project-meta">
+                                <span
+                                  className={`badge badge-dim badge-${
+                                    days > 10
+                                      ? "light"
+                                      : days <= 10 && days >= 2
+                                      ? "light"
+                                      : days === 1
+                                      ? "light"
+                                      : days <= 0 && "success"
+                                  }`}
+                                >
+                                  <Icon name="clock"></Icon>
+                                  <span>{"Aproximetly 46 hours of learning left"}</span>
+                                </span>
+                              </div>
+                            </ProjectCard>
+                          </Col>
+                        );
+                      })}{" "}
+                  </>
+                ) : (
+                  <div>
+                    {" "}
+                    <Link to={`${process.env.PUBLIC_URL}/professions`} className="nav-link">
+                      Please visit Professions you want to get
+                    </Link>
+                  </div>
+                )}
+              </Row>
+            </Block>
+          </Content>
+        </>
+      )}
     </React.Fragment>
   );
 };

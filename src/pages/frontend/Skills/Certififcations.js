@@ -93,7 +93,7 @@ const Certification = () => {
               <div className="card-inner">
                 <div className="card-title-group">
                   <div className="card-title">
-                    <h5 className="title">List of Sources</h5>
+                    <h5 className="title">List of Certifications</h5>
                   </div>
                   <div className="card-tools mr-n1">
                     <ul className="btn-toolbar">
@@ -219,9 +219,10 @@ const Certification = () => {
                             <tr className="tb-odr-item" key={item.id}>
                               <td className="tb-odr-info">
                                 <span className="tb-odr-id">
-                                  <Link to={{ pathname: `${item.url}`}} target="_blank">
+                                  {/* <Link to={{ pathname: `${item.url}`}} target="_blank">
                                     #{item.orderId}
-                                  </Link>
+                                  </Link> */}
+                                   <a href={item.url}>{item.orderId}</a>
                                 </span>
                                 <span className="tb-odr-date">{item.type}</span>
                               </td>

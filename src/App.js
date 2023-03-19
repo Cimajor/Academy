@@ -29,6 +29,7 @@ import SkillDetailsPage from "./pages/custom-pages/professions/skills-details/sk
 import Skills from "./pages/custom-pages/skills/skills";
 import MainFrontend from "./pages/frontend/MainFrontend";
 import UserDashboard from "./pages/custom-pages/dashboard/dahboard-main";
+import SkillDetails from "./pages/frontend/Skills/Skill";
 
 const App = () => {
   return (
@@ -69,6 +70,15 @@ const App = () => {
                 ></Route>
                 <Route
                   exact
+                  path={`${process.env.PUBLIC_URL}/applied-profession/frontend`}
+                  element={
+                    <PrivateRoute>
+                      <MainFrontend />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
                   path={`${process.env.PUBLIC_URL}/skills`}
                   element={
                     <PrivateRoute>
@@ -93,6 +103,15 @@ const App = () => {
                   element={
                     <PrivateRoute>
                       <SkillDetailsPage />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                                <Route
+                  exact
+                  path={`${process.env.PUBLIC_URL}/skill-details/:skill`}
+                  element={
+                    <PrivateRoute>
+                      <SkillDetails />
                     </PrivateRoute>
                   }
                 ></Route>

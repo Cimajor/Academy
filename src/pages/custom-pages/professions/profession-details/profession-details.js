@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Head from "../../../../layout/head/Head";
 import Content from "../../../../layout/content/Content";
 import DatePicker from "react-datepicker";
+import {Loader} from "semantic-ui-react"
 import {
   DropdownMenu,
   DropdownToggle,
@@ -118,7 +119,7 @@ export const ProjectListPage = () => {
 
   const applyForProfession = () => {
     const professionId = id;
-    console.log(professionId, uid); 
+    console.log(professionId, uid);
     _ApplyForProfession(uid, professionId)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -331,6 +332,8 @@ export const ProjectListPage = () => {
     newData[index].checked = e.currentTarget.checked;
     setData([...newData]);
   };
+
+  const listOfTags = ["IT", "Development", "Web", "HTML", "CSS", "UI/UX", "GIT"];
 
   const submitNote = () => {
     let submitData = {
@@ -637,16 +640,16 @@ export const ProjectListPage = () => {
                       </ul>
                     </div>
                     <div className="card-inner">
-                      <div className="overline-title-alt mb-2">In Account</div>
+                      <div className="overline-title-alt mb-2">Avarage mounth salary</div>
                       <div className="profile-balance">
                         <div className="profile-balance-group gx-4">
                           <div className="profile-balance-sub">
                             <div className="profile-balance-amount">
                               <div className="number">
-                                2,500.00 <small className="currency currency-usd">USD</small>
+                                2,500.00 <small className="currency currency-usd">EUR</small>
                               </div>
                             </div>
-                            <div className="profile-balance-subtitle">Invested Amount</div>
+                            <div className="profile-balance-subtitle">Median</div>
                           </div>
                           <div className="profile-balance-sub">
                             <span className="profile-balance-plus text-soft">
@@ -655,29 +658,23 @@ export const ProjectListPage = () => {
                             <div className="profile-balance-amount">
                               <div className="number">1,643.76</div>
                             </div>
-                            <div className="profile-balance-subtitle">Profit Earned</div>
+                            <div className="profile-balance-subtitle">Maximum</div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="card-inner">
                       <Row className="text-center">
-                        <Col size="4">
+                        <Col size="6">
                           <div className="profile-stats">
-                            <span className="amount">Order</span>
-                            <span className="sub-text">Total Order</span>
+                            <span className="amount">Area</span>
+                            <span className="sub-text">IT</span>
                           </div>
                         </Col>
-                        <Col size="4">
+                        <Col size="6">
                           <div className="profile-stats">
-                            <span className="amount">Project</span>
-                            <span className="sub-text">Complete</span>
-                          </div>
-                        </Col>
-                        <Col size="4">
-                          <div className="profile-stats">
-                            <span className="amount">Performed</span>
-                            <span className="sub-text">Progress</span>
+                            <span className="amount">Product</span>
+                            <span className="sub-text">Web applications</span>
                           </div>
                         </Col>
                       </Row>
@@ -686,20 +683,8 @@ export const ProjectListPage = () => {
                       <h6 className="overline-title-alt mb-2">Additional</h6>
                       <Row className="g-3">
                         <Col size="6">
-                          <span className="sub-text">User ID:</span>
-                          <span>UD003054</span>
-                        </Col>
-                        <Col size="6">
-                          <span className="sub-text">Last Login:</span>
-                          <span>User Last Login 01:02 PM</span>
-                        </Col>
-                        <Col size="6">
-                          <span className="sub-text">KYC Status:</span>
-                          <span className={`lead-text text-success`}>KYC</span>
-                        </Col>
-                        <Col size="6">
-                          <span className="sub-text">Register At:</span>
-                          <span>Nov 24, 2019</span>
+                          <span className="sub-text">Last data update:</span>
+                          <span>Nov 24, 2021</span>
                         </Col>
                       </Row>
                     </div>
@@ -708,72 +693,31 @@ export const ProjectListPage = () => {
                         Groups
                       </OverlineTitle>
                       <ul className="g-1">
-                        <li className="btn-group">
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            investor
-                          </Button>
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-icon btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            <Icon className="ni-cross"></Icon>
-                          </Button>
-                        </li>
-                        <li className="btn-group">
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            support
-                          </Button>
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-icon btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            <Icon className="ni-cross"></Icon>
-                          </Button>
-                        </li>
-                        <li className="btn-group">
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            another tag
-                          </Button>
-                          <Button
-                            color="light"
-                            size="xs"
-                            className="btn-icon btn-dim"
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                            }}
-                          >
-                            <Icon className="ni-cross"></Icon>
-                          </Button>
-                        </li>
+            
+                          {listOfTags.map((tag) => (
+                            <li className="btn-group">
+                              <Button
+                                color="light"
+                                size="xs"
+                                className="btn-dim"
+                                onClick={(ev) => {
+                                  ev.preventDefault();
+                                }}
+                              >
+                                {tag}
+                              </Button>
+                              <Button
+                                color="light"
+                                size="xs"
+                                className="btn-icon btn-dim"
+                                onClick={(ev) => {
+                                  ev.preventDefault();
+                                }}
+                              >
+                                <Icon className="ni-cross"></Icon>
+                              </Button>
+                              </li>
+                          ))}
                       </ul>
                     </div>
                   </Sidebar>

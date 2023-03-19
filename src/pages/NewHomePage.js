@@ -177,7 +177,7 @@ const NewHomepage = () => {
                         </div>
                         <Progress
                           className="progress-pill progress-md bg-light"
-                          value={days === 0 ? 100 : calcPercentage(item.totalTask, item.tasks)}
+                          value={days === 0 ? 100 : calcPercentage(item.tasks, item.totalTask)}
                         ></Progress>
                       </div>
                       <div className="project-meta">

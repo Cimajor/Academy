@@ -164,14 +164,15 @@ export const Skills = () => {
         });
         console.log(res.id);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .then(() => setModal({ add: false }))
+    
 
     // let submittedData = {
     //   id: data.length + 1,
     //   avatarClass: "pink",
     //   title: title,
     //   subtitle: subtitle,
-    //   desc: description,
     //   lead: formData.lead,
     //   team: formData.team,
     //   tasks: tasks,

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./assets/scss/dashlite.scss";
 import "./assets/scss/style-email.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import "semantic-ui-css/semantic.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
@@ -16,7 +17,7 @@ ReactDOM.render(
   //     </Router>
   //   </Suspense>
   // </React.Fragment>,
-  <App/>,
+  <App />,
   document.getElementById("root")
 );
 

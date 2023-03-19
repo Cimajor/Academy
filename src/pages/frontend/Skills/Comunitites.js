@@ -203,7 +203,7 @@ const Certification = () => {
                 <table className="table table-orders">
                   <thead className="tb-odr-head">
                     <tr className="tb-odr-item">
-                    <th className="tb-odr-info">
+                      <th className="tb-odr-info">
                         <span className="tb-odr-id">Source</span>
                       </th>
                       <th className="tb-odr-amount">
@@ -219,18 +219,17 @@ const Certification = () => {
                             <tr className="tb-odr-item" key={item.id}>
                               <td className="tb-odr-info">
                                 <span className="tb-odr-id">
-                                  <Link to={{ pathname: `${item.url}`}} target="_blank">
+                                  {/* <Link to={{ pathname: `${item.url}`}} target="_blank">
                                     #{item.orderId}
-                                  </Link>
+                                  </Link> */}
+                                  <a href={item.url}>{item.orderId}</a>
                                 </span>
                                 <span className="tb-odr-date">{item.type}</span>
                               </td>
                               <td className="tb-odr-amount">
                                 <span className="tb-odr-status">
                                   <Badge
-                                    color={
-                                      item.status === "Recomended" ? "success" : "danger"
-                                    }
+                                    color={item.status === "Recomended" ? "success" : "danger"}
                                     className="badge-dot"
                                   >
                                     {item.status}
@@ -239,7 +238,7 @@ const Certification = () => {
                               </td>
                               <td className="tb-odr-action">
                                 <div className="tb-odr-btns d-none d-sm-inline">
-                                <span className="amount">${item.totalAmount}</span>
+                                  <span className="amount">${item.totalAmount}</span>
                                 </div>
                                 <Link to={`${process.env.PUBLIC_URL}/invoice-details/${item.id}`}>
                                   <Button className="btn-pd-auto d-sm-none">

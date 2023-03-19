@@ -189,12 +189,15 @@ const SkillsTable = () => {
             {currentItems.length > 0
               ? currentItems.map((item) => {
                   return (
-                    <tr className={`tb-odr-item ${
-                      item.status === "Complete"
-                    ? "done-background"
-                    : item.status === "Certificated"
-                    ? "certificated-background"
-                    : "to-do-background"}`} key={item.id}>
+                    <tr className={`tb-odr-item`
+                    // ${
+                    //   item.status === "Complete"
+                    // ? "done-background"
+                    // : item.status === "Certificated"
+                    // ? "certificated-background"
+                    // : "to-do-background"}
+                    } 
+                    key={item.id}>
                       <td className="tb-odr-info">
                         <span className="tb-odr-id">
                           <Link to={`${process.env.PUBLIC_URL}/skill-details/${item.orderId}`}>

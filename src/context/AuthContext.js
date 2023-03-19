@@ -14,12 +14,10 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
+  function signup(email, password, fname, lname) {
     return createUserWithEmailAndPassword(auth, email, password).then((registeredUser) => {
       _CreateUser(registeredUser.user.uid, {
-        email: registeredUser.user.email,
-        role: "User",
-        anotherField: "Another Info...",
+        userData: { email: registeredUser.user.email, role: "User", firstName: fname, lastName: lname },
       }).then((res) => console.log(res));
     });
   }

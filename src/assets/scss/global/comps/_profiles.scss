@@ -49,8 +49,8 @@
   .profile-ud-item {
     width: 100%;
     padding-left: 0px;
-    .profile-ud-value{
-        text-align: left;
+    .profile-ud-value {
+      text-align: left;
     }
   }
 }
@@ -151,4 +151,16 @@
   background-size: cover;
   margin: auto;
   border-radius: 10rem;
+}
+
+.page-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  .ui.loader:after {
+    background-color: var(--primary) transparent transparent;
+  }
 }

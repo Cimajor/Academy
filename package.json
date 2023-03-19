@@ -50,6 +50,8 @@
     "react-syntax-highlighter": "^15.4.4",
     "reactstrap": "^8.10.0",
     "sass": "1.32",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
     "simplebar-react": "^2.3.5",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2"
