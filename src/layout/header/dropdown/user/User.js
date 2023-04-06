@@ -56,7 +56,7 @@ const User = () => {
         <div className="user-toggle">
           <UserAvatar icon="user-alt" className="sm" />
           <div className="user-info d-none d-md-block">
-            <div className="user-status">{roles ? roles.map((item) => item) : "nima"}</div>
+            <div className="user-status">{roles ? roles.map((item) => item) : "-"}</div>
             <div className="user-name dropdown-indicator">
               {userFirstName} {userLastName}
             </div>

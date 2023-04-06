@@ -144,13 +144,58 @@
   margin-left: 2rem;
 }
 
-.skill-map {
-  width: 40rem;
-  height: 40rem;
-  background-image: url("../../../../images/demo.png");
-  background-size: cover;
-  margin: auto;
+.skills-map {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.skills-map canvas {
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.table-orders th {
+  font-size: 16px;
+}
+
+.table-orders tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.table-orders .badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
   border-radius: 10rem;
+}
+
+.table-orders .badge-success,
+.table-orders .badge-warning,
+.table-orders .badge-danger {
+  background-color: transparent;
+  color: #fff;
+}
+
+.table-orders .badge-success {
+  background-color: #28a745;
+}
+
+.table-orders .badge-warning {
+  background-color: #ffc107;
+}
+
+.table-orders .badge-danger {
+  background-color: #dc3545;
 }
 
 .page-loading {

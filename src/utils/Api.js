@@ -37,17 +37,18 @@ export const _GetListOfSources = (skillName) => {
   return response;
 };
 
-export const _GetListOfReditNews = async (searchTerm, searchLimit) => {
-  // const params = { page: 1, page_size: 15, search: skillName };
 
-  var response = axios.get(`http://www.reddit.com/search.json?q=${searchTerm}&sort=relevant&limit=${searchLimit}`, {
+export const _GetListOfReditNews = (searchTerm, searchLimit, sortBy) => {
+  const params = { page: 1, page_size: 15, search: skillName };
+
+  var response = instance.get(`http://www.reddit.com/search.json?q=${searchTerm}&sort=top&limit=${searchLimit}`, {
     auth: {
       username: userID,
       password: userSecret,
     },
   });
 
-  response.then((res) => console.log(res)).catch();
+  response.then().catch();
   return response;
 };
 // export const createDocument = (collection, document) => {
@@ -79,7 +80,7 @@ export const _getProfessionSkillsData = async (arrayOfIds) => {
 
 //Skills   ============================
 export const _getSkillProfessionsData = async (skillId) => {
-  return await FirebaseFirestoreService.readDocumentsByArray("professions", "skills", skillId);
+  return await FirebaseFirestoreService.readDocumentsByArray("professions","skills",skillId);
 };
 
 export const _CreateSkill = async (body) => {
@@ -112,11 +113,12 @@ export const _getUserAppliedSkillsData = async (listOfSkills) => {
   return await FirebaseFirestoreService.readDocumentsbyQuery("professions", listOfSkills);
 };
 
+
 //Source   ============================
 export const _CreateSource = async (body) => {
   return await FirebaseFirestoreService.createDocument("source", body);
 };
 
 export const _getAllSkillSources = async (skillId) => {
-  return await FirebaseFirestoreService.readDocumentsByArray("source", "tags", skillId);
+  return await FirebaseFirestoreService.readDocumentsByArray("source","tags",skillId);
 };

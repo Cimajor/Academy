@@ -30,6 +30,7 @@ import Skills from "./pages/custom-pages/skills/skills";
 import MainFrontend from "./pages/frontend/MainFrontend";
 import UserDashboard from "./pages/custom-pages/dashboard/dahboard-main";
 import SkillDetails from "./pages/frontend/Skills/Skill";
+import MyProfile from "./pages/custom-pages/my-profile/my-profile";
 
 const App = () => {
   return (
@@ -89,6 +90,16 @@ const App = () => {
                 ></Route>
                 <Route
                   exact
+                  path={`${process.env.PUBLIC_URL}/my-profile`}
+                  element={
+                    <PrivateRoute>
+                      {" "}
+                      <MyProfile />
+                    </PrivateRoute>
+                  }
+                ></Route>
+                <Route
+                  exact
                   path={`${process.env.PUBLIC_URL}/frontend`}
                   element={
                     <PrivateRoute>
@@ -106,7 +117,7 @@ const App = () => {
                     </PrivateRoute>
                   }
                 ></Route>
-                                <Route
+                <Route
                   exact
                   path={`${process.env.PUBLIC_URL}/skill-details/:skill`}
                   element={

@@ -32,8 +32,6 @@ const deleteDocument = (collection, id) => {
   return firestore.collection(collection).doc(id).delete();
 };
 
-
-
 const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
   const q = query(collection(firestore, collectionId), where(documentId(), "in", arrayOfWalues));
   try {
@@ -43,7 +41,6 @@ const readDocumentsbyQuery = async (collectionId, arrayOfWalues) => {
     console.error(e);
   }
 };
-
 
 const readCollection = async (collectionName) => {
   try {
@@ -86,6 +83,20 @@ const addValueToArray = async (collection, documentId, array, value) => {
   });
 };
 
+export const getAllSkillSources = async (skillId) => {
+  // return await FirebaseFirestoreService.readDocumentsByArray("sources", "tags", { id: `${skillId}` });
+  console.log(skillId);
+  const q = query(
+    collection(firestore, "sources"),
+    where("tags", "array-contains", [{ id: `5bB3SraFU1cC2RcvvLKy`, title: "Css" }])
+  );
+  try {
+    const querySnapshot = await getDocs(q);
+    return querySnapshot;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 const FirebaseFirestoreService = {
   createDocument,
@@ -97,6 +108,7 @@ const FirebaseFirestoreService = {
   readDocumentsbyQuery,
   readDocumentsByArray,
   readQueryWhere,
+  getAllSkillSources,
 };
 
 export default FirebaseFirestoreService;

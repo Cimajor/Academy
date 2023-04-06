@@ -45,6 +45,7 @@ import { bulkActionOptions, findUpper } from "../../../../utils/Utils";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import './skill-details.scss'
 // import { UserContext } from "./UserContext";
 
 const SourceOfKnowledge = ({ skillTitle }) => {
@@ -75,6 +76,7 @@ const SourceOfKnowledge = ({ skillTitle }) => {
   const [relatedSources, setRelatedSources] = useState([]);
   const [listOfTags, setListOfTags] = useState([]);
   const [allSkills, setAllSKills] = useState([]);
+  const [allAvailableSkills, setAllAvailableSkills] = useState([]);
 
   // Sorting data
   const sortFunc = (params) => {
@@ -94,10 +96,8 @@ const SourceOfKnowledge = ({ skillTitle }) => {
   }, []);
 
   useEffect(() => {
-    if (modal.add === true) {
-      getAllSkills();
-    }
-  }, [modal.add]);
+    getAllSkills();
+  }, []);
 
   // Changing state value when searching name
   useEffect(() => {
@@ -199,6 +199,7 @@ const SourceOfKnowledge = ({ skillTitle }) => {
           arrayOfSkills.push(objectWithId);
         });
         const listOfoptions = rebuildListOfSkillsToListOfOptions(arrayOfSkills);
+        setAllAvailableSkills(arrayOfSkills);
         setAllSKills(listOfoptions);
         console.log(listOfoptions);
       })
@@ -288,6 +289,13 @@ const SourceOfKnowledge = ({ skillTitle }) => {
       newData = data.filter((item) => item.checked !== true);
       setData([...newData]);
     }
+  };
+
+  const getListOfSkillNames = (tags) => {
+    console.log("allSkills", allAvailableSkills);
+    console.log("tags", tags);
+    const titles = allAvailableSkills.filter((source) => tags.includes(source.id)).map((source) => source.title);
+    return titles;
   };
 
   // function to toggle the search option
@@ -690,6 +698,7 @@ const SourceOfKnowledge = ({ skillTitle }) => {
               {/*Head*/}
               {relatedSources.length > 0
                 ? relatedSources.map((item) => {
+                    getListOfSkillNames(item.tags);
                     return (
                       <DataTableItem key={item.id}>
                         <DataTableRow>
@@ -707,8 +716,11 @@ const SourceOfKnowledge = ({ skillTitle }) => {
                         <DataTableRow className="nk-tb-col-tools">
                           <span>{item.sourceType}</span>
                         </DataTableRow>
-                        <DataTableRow className="nk-tb-col-tools">
-                          <span>{item.tags.toString()}</span>
+                        <DataTableRow className="tag-cell">
+                          {getListOfSkillNames(item.tags).map((tag) => (
+                            <span className={"skill-tag"}>{tag}</span>
+                          ))}
+                          {/* <span>{getListOfSkillNames(item.tags).toString()}</span> */}
                         </DataTableRow>
                       </DataTableItem>
                     );

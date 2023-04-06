@@ -1,5 +1,11 @@
 const menu = [
   {
+    icon: "file-docs",
+    text: "My Profile",
+    link: "/my-profile",
+    role: ["Admin", "User"],
+  },
+  {
     icon: "scan-fill",
     text: "Dashboard",
     link: "/",
