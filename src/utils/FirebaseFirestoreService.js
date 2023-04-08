@@ -83,6 +83,13 @@ const addValueToArray = async (collection, documentId, array, value) => {
   });
 };
 
+const addArrayToArray = async (collection, documentId, array, value) => {
+  const collectionToUpdate = doc(firestore, collection, documentId);
+  await updateDoc(collectionToUpdate, {
+    [array]: arrayUnion(...value),
+  });
+};
+
 export const getAllSkillSources = async (skillId) => {
   // return await FirebaseFirestoreService.readDocumentsByArray("sources", "tags", { id: `${skillId}` });
   console.log(skillId);
@@ -109,6 +116,7 @@ const FirebaseFirestoreService = {
   readDocumentsByArray,
   readQueryWhere,
   getAllSkillSources,
+  addArrayToArray,
 };
 
 export default FirebaseFirestoreService;
